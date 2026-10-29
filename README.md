@@ -1,4 +1,4 @@
-# Xưởng Truyện — 0.1.1
+# Xưởng Truyện — 0.2.0
 
 Ứng dụng tiếng Việt để quản lý và sản xuất truyện dài kỳ, hướng tới đăng tiếng Anh trên Webnovel. Tham khảo **cách phân chia công việc** của [InkOS](https://github.com/Narcooo/inkos), phần triển khai trong repository này được viết riêng; không sao chép mã nguồn, thương hiệu hay prompt InkOS.
 
@@ -18,9 +18,9 @@ Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Chạy từ t
 | Thư viện truyện | Tạo và chọn bộ truyện; thống kê số chương, số chương chờ duyệt |
 | Hồ sơ truyện | Tiền đề, thể loại, ngôn ngữ, giọng văn, thế giới, quy tắc, độc quyền |
 | Nhân vật | Vai trò, mục tiêu, tính cách, quan hệ và chi tiết cần nhất quán |
-| Dàn ý | Lưu kế hoạch toàn truyện, từng tập và từng chương trong các bản ghi có tiêu đề |
+| Dàn ý | Cây Tập → Tuyến truyện → Kế hoạch chương → Cảnh, phạm vi và liên kết chương |
 | Viết chương | Ý định chương, bản thảo, tóm tắt, trạng thái và lịch sử thay đổi |
-| Trí nhớ & nút thắt | Ghi sự kiện, thời gian, quy tắc và chi tiết gợi mở; xác nhận trước khi dùng làm ngữ cảnh |
+| Trí nhớ & nút thắt | Sự kiện và nút thắt có trạng thái, chương gợi mở, mốc giải quyết và cảnh báo quá mốc |
 | Tiếng Anh & dịch thuật | Bảng thuật ngữ, quy chuẩn Anh ngữ, yêu cầu dịch, đối chiếu và duyệt song ngữ |
 | Duyệt & xuất bản | Duyệt chương, xuất TXT, mở Inkstone và ghi link đã đăng |
 
@@ -28,7 +28,7 @@ Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Chạy từ t
 
 Tạo bộ truyện → điền hồ sơ → lập nhân vật và dàn ý → tạo chương → soạn yêu cầu ChatGPT → sao chép và gửi trong ChatGPT → dán kết quả về → chờ duyệt → ghi tóm tắt và trí nhớ đã xác nhận → chương tiếp theo.
 
-Yêu cầu viết chỉ lấy tối đa 3 chương trước đã duyệt, cùng hồ sơ, dàn ý và trí nhớ đã xác nhận trước số chương hiện tại. Đây là ngữ cảnh có cấu trúc, chưa phải tìm kiếm ngữ nghĩa/RAG. Bản AI không ghi đè chương đã duyệt. Có kiểm tra xung đột khi hai tab cùng lưu.
+Yêu cầu viết chọn dàn ý liên quan theo liên kết chương, lấy tối đa 3 chương trước đã duyệt và chỉ dùng tóm tắt khớp phiên bản nội dung. Trí nhớ lấy các mục đã xác nhận trước chương hiện tại. Xem [hướng dẫn truyện dài](docs/TRUYEN_DAI.md). Đây là ngữ cảnh có cấu trúc, chưa phải tìm kiếm ngữ nghĩa/RAG. Bản AI không ghi đè chương đã duyệt. Có kiểm tra xung đột khi hai tab cùng lưu.
 
 ## Tiếng Anh: hai đường sản xuất
 

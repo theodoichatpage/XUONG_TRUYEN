@@ -20,12 +20,16 @@ SQLite lưu snapshot dữ liệu với revision toàn cục. Snapshot gồm `boo
 
 `english` chứa title, body, notes, sourceBody, sourceTitle, glossary, guide, checks, status, history. Các snapshot gốc cho biết khi nào cần duyệt lại. Bản này chưa dùng cơ sở dữ liệu quan hệ chuẩn hóa hay tìm kiếm vector; nếu mở rộng nhiều tác phẩm lớn cần đo và chuyển kiến trúc có migration.
 
+## Đã hoàn thiện ở 0.2.0
+
+Dàn ý phân cấp, chọn ngữ cảnh theo liên kết/phạm vi, phiên bản tóm tắt và vòng đời nút thắt. Chi tiết trong [TRUYEN_DAI.md](TRUYEN_DAI.md).
+
 ## Thứ tự tiếp theo
 
 1. Nghiệm thu chạy Windows và thao tác lưu/khôi phục dữ liệu thực.
 2. Tích hợp extension ChatGPT với mã công việc, khóa tab hội thoại, retry và chống ghi đè; không dùng API key.
 3. Tự chuẩn bị yêu cầu rà soát độc lập và nhận danh sách lỗi; vẫn cần người duyệt.
-4. Dàn ý phân cấp rõ tập/tuyến/cảnh, đồ thị nhân vật, sổ nút thắt có mốc giải quyết và tìm ngữ cảnh liên quan.
+4. Đồ thị nhân vật, truy vết ảnh hưởng khi sửa chương cũ và tìm ngữ cảnh ngữ nghĩa nếu cần.
 5. Tạo bìa, theo dõi lịch đăng và số liệu thực; nghiên cứu triển khai máy chủ có đăng nhập nếu cần dùng nhiều máy.
 
 Không có cron viết lúc máy tắt, không tự đăng Webnovel và không tự kết nối tài khoản ngân hàng.

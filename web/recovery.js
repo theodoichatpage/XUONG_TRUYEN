@@ -29,6 +29,7 @@ document.addEventListener('click',async e=>{const btn=e.target.closest('button')
  if(k==='english'){view='english';render();const trigger=d.enEditing.config?$('#englishConfig'):document.querySelector('[data-enedit="'+CSS.escape(d.enEditing.chapterId)+'"]');if(!trigger)throw Error('Không còn chương đích. Tải bản tạm JSON.');trigger.click()}
  if(k==='ai'){job=d.job;enJob=d.enJob;$('#prompt').value=d.values.prompt||'';$('#result').value=d.values.result||'';$('#ai').showModal()}
  for(const el of draftTargets[k].form.querySelectorAll('input[name],textarea[name],select[name]'))if(Object.hasOwn(d.values,el.name)){if(el.type==='checkbox')el.checked=d.values[el.name]===true;else el.value=d.values[el.name]}
+ if(k==='editor'&&d.editing.kind==='plans')updatePlanParent(d.values.parentId||'');
  if(d.revision!==revision){draftConflicts.add(k);toast('Đã mở bản tạm để sao chép; dữ liệu đã đổi nên cần đối chiếu với bản hiện tại.')}else draftConflicts.delete(k);
  d.restoredRevision=d.revision;
  }catch(e){toast(e.message)}}

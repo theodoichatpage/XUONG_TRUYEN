@@ -1,5 +1,15 @@
 # Thay đổi
 
+## 0.2.0 — 29/10/2026 — Truyện dài
+
+- Dàn ý phân cấp Tập → Tuyến truyện → Kế hoạch chương → Cảnh; kiểm tra cấp cha, phạm vi và liên kết chương. Giữ dàn ý cũ như ghi chú chung.
+- Yêu cầu viết chọn tập/tuyến/cảnh liên quan theo chương; chưa liên kết thì dùng phạm vi chương.
+- Tóm tắt có phiên bản nội dung riêng và xác nhận nguồn, bỏ dùng khi lỗi thời.
+- Nút thắt có trạng thái, mốc dự kiến, chương giải quyết và ghi chú kết quả. Cảnh báo đến/quá mốc; không tự giải quyết.
+- Khi viết chương cũ, không đưa ghi chú giải quyết xảy ra ở chương tương lai vào prompt.
+- 17 kiểm thử JavaScript và 16 kiểm thử Python đạt. Chưa nghiệm thu giao diện Windows.
+- Hướng dẫn: [TRUYEN_DAI.md](TRUYEN_DAI.md).
+
 ## 0.1.1 — 29/10/2026 — Độ tin cậy trước khi mở rộng
 
 - Viết lại chương bằng AI sẽ bỏ tóm tắt cũ; giữ bản cũ trong lịch sử. Sửa chương thủ công mà giữ nguyên tóm tắt cũng bỏ tóm tắt đó. Chỉ dùng tóm tắt khi nó gắn đúng nội dung chương; tóm tắt cũ chưa có dấu xác nhận nguồn sẽ được thay bằng nội dung chương trong yêu cầu nối tiếp.

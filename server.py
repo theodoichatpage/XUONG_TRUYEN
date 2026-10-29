@@ -1,4 +1,4 @@
-"""Xuong Truyen 0.1.1: local-only HTTP app, standard library, SQLite."""
+"""Xuong Truyen 0.2.0: local-only HTTP app, standard library, SQLite."""
 import json, os, secrets, sqlite3, threading, webbrowser, re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -65,15 +65,32 @@ def validate(data):
             for row in book[key]:
                 valid_id(row,row_ids)
                 for field in ('title','body'): text(row,field)
+                if key=='plans' and 'kind' in row:
+                    require(row['kind'] in ('volume','arc','chapter','scene','note'), 'Loại dàn ý không hợp lệ')
+                    text(row,'parentId',True)
+                    if row['kind']!='note':
+                        require(type(row.get('startChapter')) is int and type(row.get('endChapter')) is int and 1<=row['startChapter']<=row['endChapter']<=100000, 'Phạm vi chương dàn ý không hợp lệ')
+                        require(row['kind'] not in ('chapter','scene') or row['startChapter']==row['endChapter'], 'Kế hoạch chương/cảnh chỉ thuộc một chương')
+                    if 'order' in row: require(type(row['order']) is int and row['order']>=0,'Thứ tự dàn ý không hợp lệ')
                 if key=='memories':
                     require(type(row.get('confirmed')) is bool, 'Ghi nhớ cần xác nhận đúng kiểu')
                     require(type(row.get('chapter')) is int and row['chapter']>=1, 'Chương ghi nhớ không hợp lệ')
                     require(row.get('type') in ('Sự kiện','Nút thắt','Dòng thời gian','Quy tắc'), 'Loại ghi nhớ không hợp lệ')
+                    if row['type']=='Nút thắt':
+                        require(row.get('threadStatus','open') in ('open','developing','resolved','dropped'),'Trạng thái nút thắt không hợp lệ')
+                        for field in ('dueChapter','resolvedChapter'):
+                            require(type(row.get(field,0)) is int and 0<=row.get(field,0)<=100000,'Mốc nút thắt không hợp lệ')
+                        require(not row.get('dueChapter') or row['dueChapter']>=row['chapter'],'Mốc giải quyết phải sau chương gợi mở')
+                        text(row,'resolution',True)
+                        if row.get('threadStatus')=='resolved':
+                            require(row.get('resolvedChapter',0)>=row['chapter'] and bool(row.get('resolution','').strip()),'Nút thắt đã giải quyết cần chương và ghi chú kết quả')
                 if key!='chapters': continue
                 require(type(row.get('number')) is int and 1<=row['number']<=100000 and row['number'] not in numbers, 'Số chương không hợp lệ hoặc bị trùng')
                 numbers.add(row['number'])
                 for field in ('summary','intent'): text(row,field)
-                for field in ('summaryBody','link'): text(row,field,True)
+                for field in ('summaryBody','link','planId'): text(row,field,True)
+                for field in ('bodyRevision','summaryRevision'):
+                    if field in row: require(type(row[field]) is int and row[field]>=(1 if field=='bodyRevision' else 0),'Phiên bản nội dung/tóm tắt không hợp lệ')
                 require(row.get('status') in ('draft','review','approved','live'), 'Sai trạng thái chương')
                 require(row['status']=='draft' or bool(row['body'].strip()), 'Chương chưa có nội dung')
                 if 'revision' in row: require(type(row['revision']) is int and row['revision']>=0,'Phiên bản chương không hợp lệ')
@@ -87,6 +104,19 @@ def validate(data):
                     require(all(checks.get(k) is True for k in ('meaning','terms','voice','natural','continuity')), 'Bản dịch đã duyệt thiếu kiểm tra')
                     require(bool(en['body'].strip()) and bool(en['title'].strip()), 'Bản dịch đã duyệt bị trống')
                 history(en.get('history'),True)
+        plan_map={p['id']:p for p in book['plans']}
+        expected={'arc':'volume','chapter':'arc','scene':'chapter'}
+        for p in book['plans']:
+            kind=p.get('kind','note'); parent=p.get('parentId','')
+            if kind in ('volume','note'): require(not parent,'Tập/ghi chú chung không có cấp cha')
+            else:
+                require(parent in plan_map and plan_map[parent].get('kind')==expected[kind], 'Cấp cha dàn ý không hợp lệ')
+                ancestor=plan_map[parent]
+                require(ancestor['startChapter']<=p['startChapter']<=p['endChapter']<=ancestor['endChapter'],'Phạm vi dàn ý nằm ngoài cấp cha')
+        for c in book['chapters']:
+            if c.get('planId'):
+                require(c['planId'] in plan_map and plan_map[c['planId']].get('kind')=='chapter','Chương phải liên kết kế hoạch chương của cùng bộ truyện')
+                require(plan_map[c['planId']]['startChapter']==c['number'],'Số chương khác kế hoạch đã chọn')
     return data
 
 def save_state(data, revision, restore=False):
@@ -104,10 +134,14 @@ def save_state(data, revision, restore=False):
                 old_chapters={c['id']:c for c in old_book.get('chapters',[])}
                 for c in b['chapters']:
                     old=old_chapters.get(c['id'])
-                    if not old: continue
+                    if not old:
+                        c['bodyRevision']=1
+                        if not c.get('summary') or c.get('summaryRevision')!=1 or c.get('summaryBody')!=c['body']: c['summaryRevision']=0
+                        continue
+                    c['bodyRevision']=old.get('bodyRevision',1)+(old['body']!=c['body'])
                     if old['body']!=c['body']:
                         if c['summary']==old['summary']: c['summary']='';c['summaryBody']=''
-                        elif c['summary']: c['summaryBody']=c['body']
+                    if not c.get('summary') or c.get('summaryBody')!=c['body'] or c.get('summaryRevision')!=c['bodyRevision']: c['summaryRevision']=0
                     before=old.get('english'); after=c.get('english')
                     if before and after and any(before[k]!=after[k] for k in ('title','body','notes')):
                         after['status']='review';after['checks']={}
@@ -164,7 +198,7 @@ if __name__=='__main__':
     connect().close()
     url=f'http://127.0.0.1:{PORT}'
     server=ThreadingHTTPServer(('127.0.0.1',PORT),Handler)
-    print('Xưởng Truyện 0.1.1 — '+url, flush=True)
+    print('Xưởng Truyện 0.2.0 — '+url, flush=True)
     if '--no-browser' not in __import__('sys').argv: webbrowser.open(url)
     try: server.serve_forever()
     except KeyboardInterrupt: server.server_close()
