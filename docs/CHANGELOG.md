@@ -1,5 +1,13 @@
 # Thay đổi
 
+## 0.4.0 — 29/10/2026 — ChatGPT Bridge
+
+- Extension riêng 1.0.0 cho localhost/127.0.0.1:7872 và ChatGPT, chỉ xử lý văn bản.
+- Gửi yêu cầu viết chương, dịch nhóm và rà soát nhóm; người dùng bấm Gửi trong ChatGPT.
+- Nhận kết quả vào công việc chờ áp dụng, chống nhận trùng và ghi đè dữ liệu đã sửa.
+- Lưu job/checkpoint SQLite, giữ kết quả extension tới khi xác nhận đã lưu; dừng và nhận lại.
+- 73 kiểm thử đạt. Chưa nghiệm thu extension trên ChatGPT thực tế. [Hướng dẫn](KET_NOI_CHATGPT.md).
+
 ## 0.3.0 — 29/10/2026 — Dịch thuật nâng cao
 
 - Sáu hướng Anh/Trung giản thể/Việt; lưu mỗi ngôn ngữ đích riêng.

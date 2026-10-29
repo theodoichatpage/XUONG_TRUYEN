@@ -1,4 +1,4 @@
-# Xưởng Truyện — 0.3.0
+# Xưởng Truyện — 0.4.0
 
 Ứng dụng tiếng Việt để quản lý và sản xuất truyện dài kỳ, hướng tới đăng tiếng Anh trên Webnovel. Tham khảo **cách phân chia công việc** của [InkOS](https://github.com/Narcooo/inkos), phần triển khai trong repository này được viết riêng; không sao chép mã nguồn, thương hiệu hay prompt InkOS.
 
@@ -9,7 +9,7 @@
 3. Chạy **MO_XUONG_TRUYEN.bat**. Trình duyệt mở tại `http://127.0.0.1:7872`.
 4. Giữ cửa sổ chạy chương trình; đóng cửa sổ để dừng.
 
-Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Chạy từ terminal: `python server.py`.
+Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Để kết nối ChatGPT, xem [hướng dẫn extension](extension/HUONG_DAN.md). Chạy từ terminal: `python server.py`.
 
 ## Các khu vực vận hành
 
@@ -26,13 +26,13 @@ Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Chạy từ t
 
 ## Luồng vận hành
 
-Tạo bộ truyện → điền hồ sơ → lập nhân vật và dàn ý → tạo chương → soạn yêu cầu ChatGPT → sao chép và gửi trong ChatGPT → dán kết quả về → chờ duyệt → ghi tóm tắt và trí nhớ đã xác nhận → chương tiếp theo.
+Tạo bộ truyện → điền hồ sơ → lập nhân vật và dàn ý → tạo chương → soạn yêu cầu ChatGPT → gửi bằng extension hoặc sao chép thủ công → nhận kết quả về → chờ duyệt → ghi tóm tắt và trí nhớ đã xác nhận → chương tiếp theo.
 
 Yêu cầu viết chọn dàn ý liên quan theo liên kết chương, lấy tối đa 3 chương trước đã duyệt và chỉ dùng tóm tắt khớp phiên bản nội dung. Trí nhớ lấy các mục đã xác nhận trước chương hiện tại. Xem [hướng dẫn truyện dài](docs/TRUYEN_DAI.md). Đây là ngữ cảnh có cấu trúc, chưa phải tìm kiếm ngữ nghĩa/RAG. Bản AI không ghi đè chương đã duyệt. Có kiểm tra xung đột khi hai tab cùng lưu.
 
 ## Dịch thuật Anh – Trung – Việt
 
-Chọn ngôn ngữ nguồn/đích và giọng văn, duyệt thuật ngữ → dịch lần lượt các nhóm đoạn → rà soát từng nhóm bằng lượt AI riêng → đối chiếu song ngữ, sửa và xử lý lỗi → duyệt → xuất TXT đơn ngữ/song ngữ. Hỗ trợ Trung giản thể; không dịch tự động qua API.
+Chọn ngôn ngữ nguồn/đích và giọng văn, duyệt thuật ngữ → dịch lần lượt các nhóm đoạn → rà soát từng nhóm bằng lượt AI riêng → đối chiếu song ngữ, sửa và xử lý lỗi → duyệt → xuất TXT đơn ngữ/song ngữ. Hỗ trợ Trung giản thể; không dịch tự động qua API. Extension có thể điền yêu cầu và nhận kết quả, người dùng bấm Gửi trong ChatGPT và Áp dụng tại Xưởng.
 
 Bản gốc và mỗi ngôn ngữ đích lưu riêng. Nguồn, quy chuẩn hoặc thuật ngữ đổi thì phải rà soát lại. Xem [hướng dẫn dịch nâng cao và các dự án tham khảo](docs/DICH_THUAT_NANG_CAO.md).
 
@@ -44,7 +44,7 @@ Dữ liệu ở `data/xuong-truyen.sqlite3` trên máy. Không xóa thư mục `
 
 **Đã có:** giao diện vận hành, CRUD tạo/sửa các mục, lưu SQLite, sao lưu JSON, bản nháp/lịch sử, chuẩn bị ngữ cảnh ChatGPT, nhận kết quả thủ công, dịch thuật song song và kiểm tra trước xuất TXT.
 
-**Chưa có:** tự động gửi/nhận qua extension, tạo ảnh/bìa, đăng qua API, tài khoản máy chủ, đồng bộ nhiều máy, cron, mô hình biên tập tự chạy hoặc cam kết chất lượng dịch. Gói ChatGPT Plus dùng trong trình duyệt riêng của bạn; phần mềm không sử dụng API trả phí. Extension của Xưởng Nội Dung chưa được tích hợp vào ứng dụng này.
+**Chưa có:** tự bấm Gửi trong ChatGPT, tạo ảnh/bìa, đăng qua API, tài khoản máy chủ, đồng bộ nhiều máy, cron, mô hình biên tập tự chạy hoặc cam kết chất lượng dịch. Gói ChatGPT Plus dùng trong trình duyệt riêng của bạn; phần mềm không sử dụng API trả phí. Có extension Xưởng Truyện Bridge 1.0.0 riêng cho ứng dụng này; [hướng dẫn kết nối](docs/KET_NOI_CHATGPT.md).
 
 Repository là mã nguồn ứng dụng, không phải đường dẫn web đã triển khai. [Kế hoạch phát triển](docs/KE_HOACH.md).
 

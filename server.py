@@ -1,7 +1,8 @@
-"""Xuong Truyen 0.3.0: local-only HTTP app, standard library, SQLite."""
+"""Xuong Truyen 0.4.0: local-only HTTP app, standard library, SQLite."""
 import json, os, secrets, sqlite3, threading, webbrowser, re
 from datetime import datetime, timezone
 import translation_data
+import job_data
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
@@ -119,6 +120,7 @@ def validate(data):
             if c.get('planId'):
                 require(c['planId'] in plan_map and plan_map[c['planId']].get('kind')=='chapter','Chương phải liên kết kế hoạch chương của cùng bộ truyện')
                 require(plan_map[c['planId']]['startChapter']==c['number'],'Số chương khác kế hoạch đã chọn')
+    job_data.validate(data)
     return data
 
 def save_state(data, revision, restore=False):
@@ -204,7 +206,7 @@ if __name__=='__main__':
     connect().close()
     url=f'http://127.0.0.1:{PORT}'
     server=ThreadingHTTPServer(('127.0.0.1',PORT),Handler)
-    print('Xưởng Truyện 0.3.0 — '+url, flush=True)
+    print('Xưởng Truyện 0.4.0 — '+url, flush=True)
     if '--no-browser' not in __import__('sys').argv: webbrowser.open(url)
     try: server.serve_forever()
     except KeyboardInterrupt: server.server_close()
