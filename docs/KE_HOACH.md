@@ -28,7 +28,7 @@ Dàn ý phân cấp, chọn ngữ cảnh theo liên kết/phạm vi, phiên bả
 
 1. Nghiệm thu chạy Windows và thao tác lưu/khôi phục dữ liệu thực.
 2. Tích hợp extension ChatGPT với mã công việc, khóa tab hội thoại, retry và chống ghi đè; không dùng API key.
-3. Tự chuẩn bị yêu cầu rà soát độc lập và nhận danh sách lỗi; vẫn cần người duyệt.
+3. Đã có yêu cầu rà soát độc lập và nhận danh sách lỗi ở 0.3.0; tiếp theo nghiệm thu bản dịch thực tế với người biết song ngữ.
 4. Đồ thị nhân vật, truy vết ảnh hưởng khi sửa chương cũ và tìm ngữ cảnh ngữ nghĩa nếu cần.
 5. Tạo bìa, theo dõi lịch đăng và số liệu thực; nghiên cứu triển khai máy chủ có đăng nhập nếu cần dùng nhiều máy.
 

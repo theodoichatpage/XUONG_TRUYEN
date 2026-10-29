@@ -1,0 +1,1016 @@
+[
+  {
+    "version": 1,
+    "books": [
+      {
+        "id": "b",
+        "title": "Test",
+        "language": "English",
+        "genre": "",
+        "style": "",
+        "premise": "",
+        "world": "",
+        "length": 1500,
+        "characters": [],
+        "plans": [],
+        "memories": [],
+        "chapters": [
+          {
+            "id": "c",
+            "title": "The Key",
+            "body": "Lan found a key.\n\nShe opened the door.",
+            "number": 1,
+            "summary": "",
+            "intent": "",
+            "status": "approved",
+            "history": [],
+            "translations": {
+              "zh": {
+                "title": "钥匙",
+                "body": "兰找到了一把钥匙。\n\n她打开了门。",
+                "notes": "",
+                "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                "sourceTitle": "The Key",
+                "sourceLang": "en",
+                "targetLang": "zh",
+                "settings": {
+                  "sourceLang": "en",
+                  "targetLang": "zh",
+                  "guide": "简体中文",
+                  "legacyGlossary": "",
+                  "terms": []
+                },
+                "segments": [
+                  {
+                    "id": "p0001",
+                    "source": "Lan found a key.",
+                    "target": "兰找到了一把钥匙。",
+                    "notes": ""
+                  },
+                  {
+                    "id": "p0002",
+                    "source": "She opened the door.",
+                    "target": "她打开了门。",
+                    "notes": ""
+                  }
+                ],
+                "status": "approved",
+                "checks": {
+                  "meaning": true,
+                  "terms": true,
+                  "voice": true,
+                  "natural": true,
+                  "continuity": true
+                },
+                "reviews": [
+                  {
+                    "batch": 0,
+                    "complete": true,
+                    "basis": {
+                      "title": "钥匙",
+                      "body": "兰找到了一把钥匙。\n\n她打开了门。",
+                      "notes": "",
+                      "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                      "sourceTitle": "The Key",
+                      "settings": {
+                        "sourceLang": "en",
+                        "targetLang": "zh",
+                        "guide": "简体中文",
+                        "legacyGlossary": "",
+                        "terms": []
+                      }
+                    },
+                    "issues": []
+                  }
+                ],
+                "history": [
+                  {
+                    "title": "",
+                    "body": "\n\n",
+                    "notes": "",
+                    "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                    "sourceTitle": "The Key",
+                    "sourceLang": "en",
+                    "targetLang": "zh",
+                    "settings": {
+                      "sourceLang": "en",
+                      "targetLang": "zh",
+                      "guide": "简体中文",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan found a key.",
+                        "target": "",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "She opened the door.",
+                        "target": "",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  },
+                  {
+                    "title": "钥匙",
+                    "body": "兰找到了一把钥匙。\n\n她打开了门。",
+                    "notes": "",
+                    "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                    "sourceTitle": "The Key",
+                    "sourceLang": "en",
+                    "targetLang": "zh",
+                    "settings": {
+                      "sourceLang": "en",
+                      "targetLang": "zh",
+                      "guide": "简体中文",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan found a key.",
+                        "target": "兰找到了一把钥匙。",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "She opened the door.",
+                        "target": "她打开了门。",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "translationConfig": {
+          "sourceLang": "en",
+          "targetLang": "zh",
+          "styles": {
+            "en": "English",
+            "zh": "简体中文",
+            "vi": "Tiếng Việt"
+          },
+          "terms": []
+        }
+      }
+    ]
+  },
+  {
+    "version": 1,
+    "books": [
+      {
+        "id": "b",
+        "title": "Test",
+        "language": "English",
+        "genre": "",
+        "style": "",
+        "premise": "",
+        "world": "",
+        "length": 1500,
+        "characters": [],
+        "plans": [],
+        "memories": [],
+        "chapters": [
+          {
+            "id": "c",
+            "title": "The Key",
+            "body": "Lan found a key.\n\nShe opened the door.",
+            "number": 1,
+            "summary": "",
+            "intent": "",
+            "status": "approved",
+            "history": [],
+            "translations": {
+              "vi": {
+                "title": "Chiếc chìa khóa",
+                "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                "notes": "",
+                "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                "sourceTitle": "The Key",
+                "sourceLang": "en",
+                "targetLang": "vi",
+                "settings": {
+                  "sourceLang": "en",
+                  "targetLang": "vi",
+                  "guide": "Tiếng Việt",
+                  "legacyGlossary": "",
+                  "terms": []
+                },
+                "segments": [
+                  {
+                    "id": "p0001",
+                    "source": "Lan found a key.",
+                    "target": "Lan tìm thấy một chiếc chìa khóa.",
+                    "notes": ""
+                  },
+                  {
+                    "id": "p0002",
+                    "source": "She opened the door.",
+                    "target": "Cô mở cửa.",
+                    "notes": ""
+                  }
+                ],
+                "status": "approved",
+                "checks": {
+                  "meaning": true,
+                  "terms": true,
+                  "voice": true,
+                  "natural": true,
+                  "continuity": true
+                },
+                "reviews": [
+                  {
+                    "batch": 0,
+                    "complete": true,
+                    "basis": {
+                      "title": "Chiếc chìa khóa",
+                      "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                      "notes": "",
+                      "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                      "sourceTitle": "The Key",
+                      "settings": {
+                        "sourceLang": "en",
+                        "targetLang": "vi",
+                        "guide": "Tiếng Việt",
+                        "legacyGlossary": "",
+                        "terms": []
+                      }
+                    },
+                    "issues": []
+                  }
+                ],
+                "history": [
+                  {
+                    "title": "",
+                    "body": "\n\n",
+                    "notes": "",
+                    "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                    "sourceTitle": "The Key",
+                    "sourceLang": "en",
+                    "targetLang": "vi",
+                    "settings": {
+                      "sourceLang": "en",
+                      "targetLang": "vi",
+                      "guide": "Tiếng Việt",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan found a key.",
+                        "target": "",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "She opened the door.",
+                        "target": "",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  },
+                  {
+                    "title": "Chiếc chìa khóa",
+                    "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                    "notes": "",
+                    "sourceBody": "Lan found a key.\n\nShe opened the door.",
+                    "sourceTitle": "The Key",
+                    "sourceLang": "en",
+                    "targetLang": "vi",
+                    "settings": {
+                      "sourceLang": "en",
+                      "targetLang": "vi",
+                      "guide": "Tiếng Việt",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan found a key.",
+                        "target": "Lan tìm thấy một chiếc chìa khóa.",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "She opened the door.",
+                        "target": "Cô mở cửa.",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "translationConfig": {
+          "sourceLang": "en",
+          "targetLang": "vi",
+          "styles": {
+            "en": "English",
+            "zh": "简体中文",
+            "vi": "Tiếng Việt"
+          },
+          "terms": []
+        }
+      }
+    ]
+  },
+  {
+    "version": 1,
+    "books": [
+      {
+        "id": "b",
+        "title": "Test",
+        "language": "中文（简体）",
+        "genre": "",
+        "style": "",
+        "premise": "",
+        "world": "",
+        "length": 1500,
+        "characters": [],
+        "plans": [],
+        "memories": [],
+        "chapters": [
+          {
+            "id": "c",
+            "title": "钥匙",
+            "body": "兰找到了一把钥匙。\n\n她打开了门。",
+            "number": 1,
+            "summary": "",
+            "intent": "",
+            "status": "approved",
+            "history": [],
+            "translations": {
+              "en": {
+                "title": "The Key",
+                "body": "Lan found a key.\n\nShe opened the door.",
+                "notes": "",
+                "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                "sourceTitle": "钥匙",
+                "sourceLang": "zh",
+                "targetLang": "en",
+                "settings": {
+                  "sourceLang": "zh",
+                  "targetLang": "en",
+                  "guide": "English",
+                  "legacyGlossary": "",
+                  "terms": []
+                },
+                "segments": [
+                  {
+                    "id": "p0001",
+                    "source": "兰找到了一把钥匙。",
+                    "target": "Lan found a key.",
+                    "notes": ""
+                  },
+                  {
+                    "id": "p0002",
+                    "source": "她打开了门。",
+                    "target": "She opened the door.",
+                    "notes": ""
+                  }
+                ],
+                "status": "approved",
+                "checks": {
+                  "meaning": true,
+                  "terms": true,
+                  "voice": true,
+                  "natural": true,
+                  "continuity": true
+                },
+                "reviews": [
+                  {
+                    "batch": 0,
+                    "complete": true,
+                    "basis": {
+                      "title": "The Key",
+                      "body": "Lan found a key.\n\nShe opened the door.",
+                      "notes": "",
+                      "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                      "sourceTitle": "钥匙",
+                      "settings": {
+                        "sourceLang": "zh",
+                        "targetLang": "en",
+                        "guide": "English",
+                        "legacyGlossary": "",
+                        "terms": []
+                      }
+                    },
+                    "issues": []
+                  }
+                ],
+                "history": [
+                  {
+                    "title": "",
+                    "body": "\n\n",
+                    "notes": "",
+                    "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                    "sourceTitle": "钥匙",
+                    "sourceLang": "zh",
+                    "targetLang": "en",
+                    "settings": {
+                      "sourceLang": "zh",
+                      "targetLang": "en",
+                      "guide": "English",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "兰找到了一把钥匙。",
+                        "target": "",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "她打开了门。",
+                        "target": "",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  },
+                  {
+                    "title": "The Key",
+                    "body": "Lan found a key.\n\nShe opened the door.",
+                    "notes": "",
+                    "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                    "sourceTitle": "钥匙",
+                    "sourceLang": "zh",
+                    "targetLang": "en",
+                    "settings": {
+                      "sourceLang": "zh",
+                      "targetLang": "en",
+                      "guide": "English",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "兰找到了一把钥匙。",
+                        "target": "Lan found a key.",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "她打开了门。",
+                        "target": "She opened the door.",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "translationConfig": {
+          "sourceLang": "zh",
+          "targetLang": "en",
+          "styles": {
+            "en": "English",
+            "zh": "简体中文",
+            "vi": "Tiếng Việt"
+          },
+          "terms": []
+        }
+      }
+    ]
+  },
+  {
+    "version": 1,
+    "books": [
+      {
+        "id": "b",
+        "title": "Test",
+        "language": "中文（简体）",
+        "genre": "",
+        "style": "",
+        "premise": "",
+        "world": "",
+        "length": 1500,
+        "characters": [],
+        "plans": [],
+        "memories": [],
+        "chapters": [
+          {
+            "id": "c",
+            "title": "钥匙",
+            "body": "兰找到了一把钥匙。\n\n她打开了门。",
+            "number": 1,
+            "summary": "",
+            "intent": "",
+            "status": "approved",
+            "history": [],
+            "translations": {
+              "vi": {
+                "title": "Chiếc chìa khóa",
+                "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                "notes": "",
+                "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                "sourceTitle": "钥匙",
+                "sourceLang": "zh",
+                "targetLang": "vi",
+                "settings": {
+                  "sourceLang": "zh",
+                  "targetLang": "vi",
+                  "guide": "Tiếng Việt",
+                  "legacyGlossary": "",
+                  "terms": []
+                },
+                "segments": [
+                  {
+                    "id": "p0001",
+                    "source": "兰找到了一把钥匙。",
+                    "target": "Lan tìm thấy một chiếc chìa khóa.",
+                    "notes": ""
+                  },
+                  {
+                    "id": "p0002",
+                    "source": "她打开了门。",
+                    "target": "Cô mở cửa.",
+                    "notes": ""
+                  }
+                ],
+                "status": "approved",
+                "checks": {
+                  "meaning": true,
+                  "terms": true,
+                  "voice": true,
+                  "natural": true,
+                  "continuity": true
+                },
+                "reviews": [
+                  {
+                    "batch": 0,
+                    "complete": true,
+                    "basis": {
+                      "title": "Chiếc chìa khóa",
+                      "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                      "notes": "",
+                      "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                      "sourceTitle": "钥匙",
+                      "settings": {
+                        "sourceLang": "zh",
+                        "targetLang": "vi",
+                        "guide": "Tiếng Việt",
+                        "legacyGlossary": "",
+                        "terms": []
+                      }
+                    },
+                    "issues": []
+                  }
+                ],
+                "history": [
+                  {
+                    "title": "",
+                    "body": "\n\n",
+                    "notes": "",
+                    "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                    "sourceTitle": "钥匙",
+                    "sourceLang": "zh",
+                    "targetLang": "vi",
+                    "settings": {
+                      "sourceLang": "zh",
+                      "targetLang": "vi",
+                      "guide": "Tiếng Việt",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "兰找到了一把钥匙。",
+                        "target": "",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "她打开了门。",
+                        "target": "",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  },
+                  {
+                    "title": "Chiếc chìa khóa",
+                    "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                    "notes": "",
+                    "sourceBody": "兰找到了一把钥匙。\n\n她打开了门。",
+                    "sourceTitle": "钥匙",
+                    "sourceLang": "zh",
+                    "targetLang": "vi",
+                    "settings": {
+                      "sourceLang": "zh",
+                      "targetLang": "vi",
+                      "guide": "Tiếng Việt",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "兰找到了一把钥匙。",
+                        "target": "Lan tìm thấy một chiếc chìa khóa.",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "她打开了门。",
+                        "target": "Cô mở cửa.",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "translationConfig": {
+          "sourceLang": "zh",
+          "targetLang": "vi",
+          "styles": {
+            "en": "English",
+            "zh": "简体中文",
+            "vi": "Tiếng Việt"
+          },
+          "terms": []
+        }
+      }
+    ]
+  },
+  {
+    "version": 1,
+    "books": [
+      {
+        "id": "b",
+        "title": "Test",
+        "language": "Tiếng Việt",
+        "genre": "",
+        "style": "",
+        "premise": "",
+        "world": "",
+        "length": 1500,
+        "characters": [],
+        "plans": [],
+        "memories": [],
+        "chapters": [
+          {
+            "id": "c",
+            "title": "Chiếc chìa khóa",
+            "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+            "number": 1,
+            "summary": "",
+            "intent": "",
+            "status": "approved",
+            "history": [],
+            "translations": {
+              "en": {
+                "title": "The Key",
+                "body": "Lan found a key.\n\nShe opened the door.",
+                "notes": "",
+                "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                "sourceTitle": "Chiếc chìa khóa",
+                "sourceLang": "vi",
+                "targetLang": "en",
+                "settings": {
+                  "sourceLang": "vi",
+                  "targetLang": "en",
+                  "guide": "English",
+                  "legacyGlossary": "",
+                  "terms": []
+                },
+                "segments": [
+                  {
+                    "id": "p0001",
+                    "source": "Lan tìm thấy một chiếc chìa khóa.",
+                    "target": "Lan found a key.",
+                    "notes": ""
+                  },
+                  {
+                    "id": "p0002",
+                    "source": "Cô mở cửa.",
+                    "target": "She opened the door.",
+                    "notes": ""
+                  }
+                ],
+                "status": "approved",
+                "checks": {
+                  "meaning": true,
+                  "terms": true,
+                  "voice": true,
+                  "natural": true,
+                  "continuity": true
+                },
+                "reviews": [
+                  {
+                    "batch": 0,
+                    "complete": true,
+                    "basis": {
+                      "title": "The Key",
+                      "body": "Lan found a key.\n\nShe opened the door.",
+                      "notes": "",
+                      "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                      "sourceTitle": "Chiếc chìa khóa",
+                      "settings": {
+                        "sourceLang": "vi",
+                        "targetLang": "en",
+                        "guide": "English",
+                        "legacyGlossary": "",
+                        "terms": []
+                      }
+                    },
+                    "issues": []
+                  }
+                ],
+                "history": [
+                  {
+                    "title": "",
+                    "body": "\n\n",
+                    "notes": "",
+                    "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                    "sourceTitle": "Chiếc chìa khóa",
+                    "sourceLang": "vi",
+                    "targetLang": "en",
+                    "settings": {
+                      "sourceLang": "vi",
+                      "targetLang": "en",
+                      "guide": "English",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan tìm thấy một chiếc chìa khóa.",
+                        "target": "",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "Cô mở cửa.",
+                        "target": "",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  },
+                  {
+                    "title": "The Key",
+                    "body": "Lan found a key.\n\nShe opened the door.",
+                    "notes": "",
+                    "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                    "sourceTitle": "Chiếc chìa khóa",
+                    "sourceLang": "vi",
+                    "targetLang": "en",
+                    "settings": {
+                      "sourceLang": "vi",
+                      "targetLang": "en",
+                      "guide": "English",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan tìm thấy một chiếc chìa khóa.",
+                        "target": "Lan found a key.",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "Cô mở cửa.",
+                        "target": "She opened the door.",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "translationConfig": {
+          "sourceLang": "vi",
+          "targetLang": "en",
+          "styles": {
+            "en": "English",
+            "zh": "简体中文",
+            "vi": "Tiếng Việt"
+          },
+          "terms": []
+        }
+      }
+    ]
+  },
+  {
+    "version": 1,
+    "books": [
+      {
+        "id": "b",
+        "title": "Test",
+        "language": "Tiếng Việt",
+        "genre": "",
+        "style": "",
+        "premise": "",
+        "world": "",
+        "length": 1500,
+        "characters": [],
+        "plans": [],
+        "memories": [],
+        "chapters": [
+          {
+            "id": "c",
+            "title": "Chiếc chìa khóa",
+            "body": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+            "number": 1,
+            "summary": "",
+            "intent": "",
+            "status": "approved",
+            "history": [],
+            "translations": {
+              "zh": {
+                "title": "钥匙",
+                "body": "兰找到了一把钥匙。\n\n她打开了门。",
+                "notes": "",
+                "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                "sourceTitle": "Chiếc chìa khóa",
+                "sourceLang": "vi",
+                "targetLang": "zh",
+                "settings": {
+                  "sourceLang": "vi",
+                  "targetLang": "zh",
+                  "guide": "简体中文",
+                  "legacyGlossary": "",
+                  "terms": []
+                },
+                "segments": [
+                  {
+                    "id": "p0001",
+                    "source": "Lan tìm thấy một chiếc chìa khóa.",
+                    "target": "兰找到了一把钥匙。",
+                    "notes": ""
+                  },
+                  {
+                    "id": "p0002",
+                    "source": "Cô mở cửa.",
+                    "target": "她打开了门。",
+                    "notes": ""
+                  }
+                ],
+                "status": "approved",
+                "checks": {
+                  "meaning": true,
+                  "terms": true,
+                  "voice": true,
+                  "natural": true,
+                  "continuity": true
+                },
+                "reviews": [
+                  {
+                    "batch": 0,
+                    "complete": true,
+                    "basis": {
+                      "title": "钥匙",
+                      "body": "兰找到了一把钥匙。\n\n她打开了门。",
+                      "notes": "",
+                      "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                      "sourceTitle": "Chiếc chìa khóa",
+                      "settings": {
+                        "sourceLang": "vi",
+                        "targetLang": "zh",
+                        "guide": "简体中文",
+                        "legacyGlossary": "",
+                        "terms": []
+                      }
+                    },
+                    "issues": []
+                  }
+                ],
+                "history": [
+                  {
+                    "title": "",
+                    "body": "\n\n",
+                    "notes": "",
+                    "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                    "sourceTitle": "Chiếc chìa khóa",
+                    "sourceLang": "vi",
+                    "targetLang": "zh",
+                    "settings": {
+                      "sourceLang": "vi",
+                      "targetLang": "zh",
+                      "guide": "简体中文",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan tìm thấy một chiếc chìa khóa.",
+                        "target": "",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "Cô mở cửa.",
+                        "target": "",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  },
+                  {
+                    "title": "钥匙",
+                    "body": "兰找到了一把钥匙。\n\n她打开了门。",
+                    "notes": "",
+                    "sourceBody": "Lan tìm thấy một chiếc chìa khóa.\n\nCô mở cửa.",
+                    "sourceTitle": "Chiếc chìa khóa",
+                    "sourceLang": "vi",
+                    "targetLang": "zh",
+                    "settings": {
+                      "sourceLang": "vi",
+                      "targetLang": "zh",
+                      "guide": "简体中文",
+                      "legacyGlossary": "",
+                      "terms": []
+                    },
+                    "segments": [
+                      {
+                        "id": "p0001",
+                        "source": "Lan tìm thấy một chiếc chìa khóa.",
+                        "target": "兰找到了一把钥匙。",
+                        "notes": ""
+                      },
+                      {
+                        "id": "p0002",
+                        "source": "Cô mở cửa.",
+                        "target": "她打开了门。",
+                        "notes": ""
+                      }
+                    ],
+                    "status": "review",
+                    "checks": {},
+                    "reviews": []
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "translationConfig": {
+          "sourceLang": "vi",
+          "targetLang": "zh",
+          "styles": {
+            "en": "English",
+            "zh": "简体中文",
+            "vi": "Tiếng Việt"
+          },
+          "terms": []
+        }
+      }
+    ]
+  }
+]

@@ -1,5 +1,14 @@
 # Thay đổi
 
+## 0.3.0 — 29/10/2026 — Dịch thuật nâng cao
+
+- Sáu hướng Anh/Trung giản thể/Việt; lưu mỗi ngôn ngữ đích riêng.
+- Thuật ngữ có bảng nhập theo cặp ngôn ngữ, cảnh báo từ Latin/chữ Hán và số liệu.
+- Dịch theo nhóm có mã đoạn, từ chối thiếu/trùng/sai đoạn, đọc đối chiếu cạnh nhau.
+- Rà soát độc lập theo nhóm, xử lý lỗi có lý do, báo cáo gắn với bản dịch; thay nội dung phải rà soát lại.
+- Xuất TXT đơn ngữ/song ngữ sau duyệt; giữ bản Anh cũ để tham khảo.
+- 50 kiểm thử đạt. Chưa nghiệm thu giao diện Windows hoặc dịch với ChatGPT thật. [Hướng dẫn và nguồn tham khảo](DICH_THUAT_NANG_CAO.md).
+
 ## 0.2.0 — 29/10/2026 — Truyện dài
 
 - Dàn ý phân cấp Tập → Tuyến truyện → Kế hoạch chương → Cảnh; kiểm tra cấp cha, phạm vi và liên kết chương. Giữ dàn ý cũ như ghi chú chung.

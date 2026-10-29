@@ -1,4 +1,4 @@
-# Xưởng Truyện — 0.2.0
+# Xưởng Truyện — 0.3.0
 
 Ứng dụng tiếng Việt để quản lý và sản xuất truyện dài kỳ, hướng tới đăng tiếng Anh trên Webnovel. Tham khảo **cách phân chia công việc** của [InkOS](https://github.com/Narcooo/inkos), phần triển khai trong repository này được viết riêng; không sao chép mã nguồn, thương hiệu hay prompt InkOS.
 
@@ -21,7 +21,7 @@ Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Chạy từ t
 | Dàn ý | Cây Tập → Tuyến truyện → Kế hoạch chương → Cảnh, phạm vi và liên kết chương |
 | Viết chương | Ý định chương, bản thảo, tóm tắt, trạng thái và lịch sử thay đổi |
 | Trí nhớ & nút thắt | Sự kiện và nút thắt có trạng thái, chương gợi mở, mốc giải quyết và cảnh báo quá mốc |
-| Tiếng Anh & dịch thuật | Bảng thuật ngữ, quy chuẩn Anh ngữ, yêu cầu dịch, đối chiếu và duyệt song ngữ |
+| Dịch thuật Anh · Trung · Việt | Sáu hướng dịch, bảng thuật ngữ theo cặp, đối chiếu theo đoạn, rà soát độc lập, duyệt và xuất song ngữ |
 | Duyệt & xuất bản | Duyệt chương, xuất TXT, mở Inkstone và ghi link đã đăng |
 
 ## Luồng vận hành
@@ -30,12 +30,11 @@ Tạo bộ truyện → điền hồ sơ → lập nhân vật và dàn ý → t
 
 Yêu cầu viết chọn dàn ý liên quan theo liên kết chương, lấy tối đa 3 chương trước đã duyệt và chỉ dùng tóm tắt khớp phiên bản nội dung. Trí nhớ lấy các mục đã xác nhận trước chương hiện tại. Xem [hướng dẫn truyện dài](docs/TRUYEN_DAI.md). Đây là ngữ cảnh có cấu trúc, chưa phải tìm kiếm ngữ nghĩa/RAG. Bản AI không ghi đè chương đã duyệt. Có kiểm tra xung đột khi hai tab cùng lưu.
 
-## Tiếng Anh: hai đường sản xuất
+## Dịch thuật Anh – Trung – Việt
 
-- **Viết thẳng tiếng Anh:** đặt ngôn ngữ bộ truyện là English; lập và duyệt dàn ý, rồi tạo từng chương bằng yêu cầu tiếng Anh. Người dùng vẫn duyệt nội dung và ngôn ngữ.
-- **Dịch từ tiếng Việt:** duyệt bản gốc trước → nhập bảng thuật ngữ → soạn yêu cầu dịch → nhận JSON → đối chiếu song ngữ → xác nhận 5 mục kiểm tra → xuất bản Anh.
+Chọn ngôn ngữ nguồn/đích và giọng văn, duyệt thuật ngữ → dịch lần lượt các nhóm đoạn → rà soát từng nhóm bằng lượt AI riêng → đối chiếu song ngữ, sửa và xử lý lỗi → duyệt → xuất TXT đơn ngữ/song ngữ. Hỗ trợ Trung giản thể; không dịch tự động qua API.
 
-Bản dịch lưu riêng, không thay bản gốc. Khi bản gốc, tiêu đề, bảng thuật ngữ hoặc quy chuẩn thay đổi, bản Anh không được xuất cho tới khi duyệt lại. Đọc [QUY_TRINH_TIENG_ANH.md](docs/QUY_TRINH_TIENG_ANH.md).
+Bản gốc và mỗi ngôn ngữ đích lưu riêng. Nguồn, quy chuẩn hoặc thuật ngữ đổi thì phải rà soát lại. Xem [hướng dẫn dịch nâng cao và các dự án tham khảo](docs/DICH_THUAT_NANG_CAO.md).
 
 ## Lưu trữ và sao lưu
 
@@ -45,7 +44,7 @@ Dữ liệu ở `data/xuong-truyen.sqlite3` trên máy. Không xóa thư mục `
 
 **Đã có:** giao diện vận hành, CRUD tạo/sửa các mục, lưu SQLite, sao lưu JSON, bản nháp/lịch sử, chuẩn bị ngữ cảnh ChatGPT, nhận kết quả thủ công, dịch thuật song song và kiểm tra trước xuất TXT.
 
-**Chưa có:** tự động gửi/nhận qua extension, tạo ảnh/bìa, đăng qua API, tài khoản máy chủ, đồng bộ nhiều máy, cron, biên tập viên tiếng Anh tự động hoặc cam kết chất lượng dịch. Gói ChatGPT Plus dùng trong trình duyệt riêng của bạn; phần mềm không sử dụng API trả phí. Extension của Xưởng Nội Dung chưa được tích hợp vào ứng dụng này.
+**Chưa có:** tự động gửi/nhận qua extension, tạo ảnh/bìa, đăng qua API, tài khoản máy chủ, đồng bộ nhiều máy, cron, mô hình biên tập tự chạy hoặc cam kết chất lượng dịch. Gói ChatGPT Plus dùng trong trình duyệt riêng của bạn; phần mềm không sử dụng API trả phí. Extension của Xưởng Nội Dung chưa được tích hợp vào ứng dụng này.
 
 Repository là mã nguồn ứng dụng, không phải đường dẫn web đã triển khai. [Kế hoạch phát triển](docs/KE_HOACH.md).
 

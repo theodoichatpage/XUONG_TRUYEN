@@ -1,3 +1,5 @@
+> Tài liệu nền từ 0.1–0.2. Cách thao tác và JSON hiện tại ở [DICH_THUAT_NANG_CAO.md](DICH_THUAT_NANG_CAO.md); bản 0.3 dịch theo mã đoạn và thêm lượt rà soát riêng.
+
 # Quy trình tiếng Anh và kiểm soát chất lượng
 
 Mục tiêu: văn xuôi tiếng Anh tự nhiên, giữ chính xác nội dung và cá tính bản gốc. Không tuyên bố bản dịch chuẩn tuyệt đối do AI sinh ra. Bản thảo gửi Webnovel cần được người có năng lực tiếng Anh duyệt; tác phẩm thương mại nên có biên tập song ngữ.

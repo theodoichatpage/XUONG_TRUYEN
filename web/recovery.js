@@ -26,8 +26,9 @@ document.addEventListener('click',async e=>{const btn=e.target.closest('button')
  if(d.bookId&&!state.books.some(b=>b.id===d.bookId))throw Error('Bộ truyện không còn tồn tại. Tải bản tạm JSON để giữ nội dung.');
  currentId=d.bookId;recoveryDialog.close();
  if(k==='editor'){view=d.editing.kind==='book'?'library':d.editing.kind;render();openEditor(d.editing.kind,d.editing.id)}
- if(k==='english'){view='english';render();const trigger=d.enEditing.config?$('#englishConfig'):document.querySelector('[data-enedit="'+CSS.escape(d.enEditing.chapterId)+'"]');if(!trigger)throw Error('Không còn chương đích. Tải bản tạm JSON.');trigger.click()}
+ if(k==='english'){view='english';render();if(d.enEditing.config)openTranslationConfig();else openTranslationEditor(d.enEditing.chapterId,d.enEditing.target);enEditing=d.enEditing}
  if(k==='ai'){job=d.job;enJob=d.enJob;$('#prompt').value=d.values.prompt||'';$('#result').value=d.values.result||'';$('#ai').showModal()}
+ if(k==='english'&&d.enEditing.config)ensureTermRows(d.values);
  for(const el of draftTargets[k].form.querySelectorAll('input[name],textarea[name],select[name]'))if(Object.hasOwn(d.values,el.name)){if(el.type==='checkbox')el.checked=d.values[el.name]===true;else el.value=d.values[el.name]}
  if(k==='editor'&&d.editing.kind==='plans')updatePlanParent(d.values.parentId||'');
  if(d.revision!==revision){draftConflicts.add(k);toast('Đã mở bản tạm để sao chép; dữ liệu đã đổi nên cần đối chiếu với bản hiện tại.')}else draftConflicts.delete(k);

@@ -1,6 +1,7 @@
-"""Xuong Truyen 0.2.0: local-only HTTP app, standard library, SQLite."""
+"""Xuong Truyen 0.3.0: local-only HTTP app, standard library, SQLite."""
 import json, os, secrets, sqlite3, threading, webbrowser, re
 from datetime import datetime, timezone
+import translation_data
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
@@ -104,6 +105,7 @@ def validate(data):
                     require(all(checks.get(k) is True for k in ('meaning','terms','voice','natural','continuity')), 'Bản dịch đã duyệt thiếu kiểm tra')
                     require(bool(en['body'].strip()) and bool(en['title'].strip()), 'Bản dịch đã duyệt bị trống')
                 history(en.get('history'),True)
+        translation_data.validate_book(book)
         plan_map={p['id']:p for p in book['plans']}
         expected={'arc':'volume','chapter':'arc','scene':'chapter'}
         for p in book['plans']:
@@ -142,6 +144,10 @@ def save_state(data, revision, restore=False):
                     if old['body']!=c['body']:
                         if c['summary']==old['summary']: c['summary']='';c['summaryBody']=''
                     if not c.get('summary') or c.get('summaryBody')!=c['body'] or c.get('summaryRevision')!=c['bodyRevision']: c['summaryRevision']=0
+                    for target,after_translation in c.get('translations',{}).items():
+                        before_translation=old.get('translations',{}).get(target)
+                        if before_translation and translation_data.basis(before_translation)!=translation_data.basis(after_translation):
+                            after_translation['status']='review';after_translation['checks']={};after_translation['reviews']=[]
                     before=old.get('english'); after=c.get('english')
                     if before and after and any(before[k]!=after[k] for k in ('title','body','notes')):
                         after['status']='review';after['checks']={}
@@ -198,7 +204,7 @@ if __name__=='__main__':
     connect().close()
     url=f'http://127.0.0.1:{PORT}'
     server=ThreadingHTTPServer(('127.0.0.1',PORT),Handler)
-    print('Xưởng Truyện 0.2.0 — '+url, flush=True)
+    print('Xưởng Truyện 0.3.0 — '+url, flush=True)
     if '--no-browser' not in __import__('sys').argv: webbrowser.open(url)
     try: server.serve_forever()
     except KeyboardInterrupt: server.server_close()
