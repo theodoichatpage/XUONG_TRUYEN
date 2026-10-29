@@ -1,0 +1,12 @@
+const {test}=require('node:test'),a=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+function setup(initial={}){
+ const nodes={},storage=new Map(Object.entries(initial)),clicks=[];
+ function node(){return {open:true,textContent:'',fields:[],events:{},append(){},querySelectorAll(){return this.fields},addEventListener(k,f){this.events[k]=f},showModal(){this.open=true},close(){this.open=false}}}
+ for(const key of ['#editor','#form','#enForm','#ai','#prompt','#result','header>div','#closeRecovery','#recoveryRows'])nodes[key]=node();
+ nodes['#form'].fields=[{name:'body',type:'textarea',value:'unsaved words'}];
+ const context={console,Story:require('../web/core.js'),state:{books:[]},revision:2,view:"library",currentId:null,editing:{kind:'book'},enEditing:{config:true},job:{chapterId:'c'},enJob:null,enDialog:node(),$:s=>nodes[s],esc:require('../web/core.js').esc,sessionStorage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},document:{createElement:()=>node(),body:{append(){}},addEventListener:(k,f)=>{if(k==='click')clicks.push(f)}},window:{addEventListener(){}},toast:()=>{},download:()=>{},render:()=>{},openEditor:()=>{},CSS:{escape:s=>s}};
+ vm.createContext(context);vm.runInContext(fs.readFileSync('web/recovery.js','utf8'),context);return {context,nodes,storage,clicks};
+}
+test('unsaved editor is captured and cleared only explicitly',()=>{const h=setup();a.equal(h.context.captureDraft('editor'),true);const d=JSON.parse(h.storage.get('xt-unsaved-v1')).editor;a.equal(d.values.body,'unsaved words');a.equal(d.revision,2);h.context.clearDraft('editor');a.deepEqual(JSON.parse(h.storage.get('xt-unsaved-v1')),{});});
+test('AI prompt, result and target survive draft capture',()=>{const h=setup();h.nodes['#prompt'].value='prompt';h.nodes['#result'].value='result';h.context.captureDraft('ai');const d=JSON.parse(h.storage.get('xt-unsaved-v1')).ai;a.equal(d.values.prompt,'prompt');a.equal(d.values.result,'result');a.equal(d.job.chapterId,'c')});
+test('recovered draft from older data cannot silently overwrite current state',async()=>{const h=setup({'xt-unsaved-v1':JSON.stringify({editor:{kind:'editor',bookId:null,revision:1,editing:{kind:'book'},values:{body:'older text'}}})});await h.clicks[0]({target:{closest:()=>({dataset:{resumeDraft:'editor'}})}});a.equal(h.context.draftCanSave('editor'),false);a.equal(h.nodes['#form'].fields[0].value,'older text');h.context.captureDraft('editor');a.equal(JSON.parse(h.storage.get('xt-unsaved-v1')).editor.revision,1)});

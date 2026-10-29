@@ -1,5 +1,6 @@
-"""Xuong Truyen 0.1.0: local-only HTTP app, standard library, SQLite."""
-import json, os, secrets, sqlite3, threading, webbrowser
+"""Xuong Truyen 0.1.1: local-only HTTP app, standard library, SQLite."""
+import json, os, secrets, sqlite3, threading, webbrowser, re
+from datetime import datetime, timezone
 from pathlib import Path
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
@@ -18,42 +19,105 @@ def connect():
     con.commit()
     return con
 
+def require(ok, message):
+    if not ok: raise ValueError(message)
+
+def text(obj, key, optional=False):
+    require((optional and key not in obj) or isinstance(obj.get(key), str), 'Trường văn bản không hợp lệ: '+key)
+
+def history(rows, english=False):
+    require(isinstance(rows,list), 'Lịch sử phải là danh sách')
+    for row in rows:
+        require(isinstance(row,dict), 'Bản lịch sử không hợp lệ')
+        for key in ('body','summary','status','at'):
+            text(row,key,optional=english or key in ('summary','at'))
+        if english:
+            for key in ('title','notes','sourceBody','sourceTitle','glossary','guide'):
+                text(row,key)
+            require(row.get('status') in ('review','approved'), 'Trạng thái lịch sử dịch không hợp lệ')
+            require(isinstance(row.get('checks'),dict) and all(type(v) is bool for v in row['checks'].values()), 'Kiểm tra lịch sử dịch không hợp lệ')
+        else:
+            require(row.get('status') in ('draft','review','approved','live'), 'Trạng thái lịch sử không hợp lệ')
+
+def safe_keys(value):
+    if isinstance(value,dict):
+        require(not any(k in ('__proto__','constructor','prototype') for k in value), 'Khóa dữ liệu không được phép')
+        for v in value.values(): safe_keys(v)
+    elif isinstance(value,list):
+        for v in value: safe_keys(v)
+
 def validate(data):
-    if not isinstance(data, dict) or data.get('version') != 1 or not isinstance(data.get('books'), list):
-        raise ValueError('Sai định dạng dữ liệu')
-    ids = set()
+    safe_keys(data)
+    require(isinstance(data,dict) and type(data.get('version')) is int and data['version']==1 and isinstance(data.get('books'),list), 'Sai định dạng dữ liệu')
+    def valid_id(row, ids):
+        require(isinstance(row,dict) and isinstance(row.get('id'),str) and re.fullmatch(r'[A-Za-z0-9_-]{1,100}',row['id']) is not None, 'Mã bản ghi không hợp lệ')
+        require(row['id'] not in ids, 'Mã bản ghi bị trùng'); ids.add(row['id'])
+    ids=set()
     for book in data['books']:
-        if not isinstance(book, dict) or not isinstance(book.get('id'), str) or book['id'] in ids:
-            raise ValueError('Mã bộ truyện bị trùng hoặc thiếu')
-        ids.add(book['id'])
-        for key in ('language','genre','style','premise','world'):
-            if not isinstance(book.get(key),str): raise ValueError('Hồ sơ thiếu trường '+key)
-        if not isinstance(book.get('length'),int) or book['length']<1: raise ValueError('Độ dài không hợp lệ')
-        if not isinstance(book.get('title'), str) or not book['title'].strip():
-            raise ValueError('Thiếu tên bộ truyện')
+        valid_id(book,ids)
+        for key in ('title','language','genre','style','premise','world'): text(book,key)
+        require(bool(book['title'].strip()), 'Thiếu tên bộ truyện')
+        for key in ('glossary','englishGuide','exclusivity'): text(book,key,True)
+        require(type(book.get('length')) is int and 1<=book['length']<=100000, 'Độ dài không hợp lệ')
         for key in ('characters','plans','chapters','memories'):
-            if not isinstance(book.get(key), list): raise ValueError('Thiếu danh sách '+key)
-            row_ids = set()
+            require(isinstance(book.get(key),list), 'Thiếu danh sách '+key)
+            row_ids=set(); numbers=set()
             for row in book[key]:
-                if not isinstance(row, dict) or not isinstance(row.get('id'),str) or row['id'] in row_ids:
-                    raise ValueError('Mã bản ghi bị trùng hoặc thiếu')
-                row_ids.add(row['id'])
-                if not isinstance(row.get('title'),str) or not isinstance(row.get('body'),str): raise ValueError('Bản ghi thiếu tiêu đề hoặc nội dung')
-                if key == 'chapters':
-                    if not isinstance(row.get('number'),int) or row['number']<1: raise ValueError('Số chương không hợp lệ')
-                    if not isinstance(row.get('summary'),str) or not isinstance(row.get('intent'),str): raise ValueError('Thiếu hồ sơ chương')
-                    if row.get('status') not in ('draft','review','approved','live'): raise ValueError('Sai trạng thái chương')
-                    if row['status'] != 'draft' and not str(row.get('body','')).strip(): raise ValueError('Chương chưa có nội dung')
-                    if not isinstance(row.get('history'),list): raise ValueError('Thiếu lịch sử chương')
+                valid_id(row,row_ids)
+                for field in ('title','body'): text(row,field)
+                if key=='memories':
+                    require(type(row.get('confirmed')) is bool, 'Ghi nhớ cần xác nhận đúng kiểu')
+                    require(type(row.get('chapter')) is int and row['chapter']>=1, 'Chương ghi nhớ không hợp lệ')
+                    require(row.get('type') in ('Sự kiện','Nút thắt','Dòng thời gian','Quy tắc'), 'Loại ghi nhớ không hợp lệ')
+                if key!='chapters': continue
+                require(type(row.get('number')) is int and 1<=row['number']<=100000 and row['number'] not in numbers, 'Số chương không hợp lệ hoặc bị trùng')
+                numbers.add(row['number'])
+                for field in ('summary','intent'): text(row,field)
+                for field in ('summaryBody','link'): text(row,field,True)
+                require(row.get('status') in ('draft','review','approved','live'), 'Sai trạng thái chương')
+                require(row['status']=='draft' or bool(row['body'].strip()), 'Chương chưa có nội dung')
+                if 'revision' in row: require(type(row['revision']) is int and row['revision']>=0,'Phiên bản chương không hợp lệ')
+                history(row.get('history'))
+                if 'english' not in row: continue
+                en=row['english'];require(isinstance(en,dict), 'Bản dịch không hợp lệ')
+                for field in ('title','body','notes','sourceBody','sourceTitle','glossary','guide'): text(en,field)
+                require(en.get('status') in ('review','approved'), 'Trạng thái bản dịch không hợp lệ')
+                checks=en.get('checks');require(isinstance(checks,dict) and all(k in ('meaning','terms','voice','natural','continuity') and type(v) is bool for k,v in checks.items()), 'Checklist bản dịch không hợp lệ')
+                if en['status']=='approved':
+                    require(all(checks.get(k) is True for k in ('meaning','terms','voice','natural','continuity')), 'Bản dịch đã duyệt thiếu kiểm tra')
+                    require(bool(en['body'].strip()) and bool(en['title'].strip()), 'Bản dịch đã duyệt bị trống')
+                history(en.get('history'),True)
     return data
 
-def save_state(data, revision):
+def save_state(data, revision, restore=False):
+    require(type(revision) is int and revision>=0, 'Phiên bản dữ liệu không hợp lệ')
     validate(data)
-    body = json.dumps(data, ensure_ascii=False)
+    body=json.dumps(data,ensure_ascii=False)
     with LOCK, connect() as con:
-        result = con.execute('UPDATE state SET body=?, revision=revision+1 WHERE id=1 AND revision=?',(body,revision))
-        if result.rowcount != 1: raise RuntimeError('Dữ liệu đã thay đổi ở tab khác. Sao chép phần đang sửa rồi tải lại trang.')
+        old_revision,old_body=con.execute('SELECT revision,body FROM state WHERE id=1').fetchone()
+        if old_revision!=revision: raise RuntimeError('Dữ liệu đã thay đổi ở tab khác. Sao chép phần đang sửa rồi tải lại trang.')
+        if not restore:
+            previous=json.loads(old_body)
+            old_books={b['id']:b for b in previous['books']}
+            for b in data['books']:
+                old_book=old_books.get(b['id'],{})
+                old_chapters={c['id']:c for c in old_book.get('chapters',[])}
+                for c in b['chapters']:
+                    old=old_chapters.get(c['id'])
+                    if not old: continue
+                    if old['body']!=c['body']:
+                        if c['summary']==old['summary']: c['summary']='';c['summaryBody']=''
+                        elif c['summary']: c['summaryBody']=c['body']
+                    before=old.get('english'); after=c.get('english')
+                    if before and after and any(before[k]!=after[k] for k in ('title','body','notes')):
+                        after['status']='review';after['checks']={}
+            body=json.dumps(data,ensure_ascii=False)
+        if restore:
+            con.execute('CREATE TABLE IF NOT EXISTS backups (id TEXT PRIMARY KEY, created_at TEXT NOT NULL, revision INTEGER NOT NULL, body TEXT NOT NULL)')
+            con.execute('INSERT INTO backups VALUES (?,?,?,?)',(secrets.token_hex(16),datetime.now(timezone.utc).isoformat(),revision,old_body))
+        con.execute('UPDATE state SET body=?,revision=revision+1 WHERE id=1',(body,))
     return revision+1
+
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*a,**kw): super().__init__(*a,directory=str(ROOT/'web'),**kw)
@@ -68,25 +132,39 @@ class Handler(SimpleHTTPRequestHandler):
         if self.path=='/api/state':
             with connect() as con: revision,body=con.execute('SELECT revision,body FROM state WHERE id=1').fetchone()
             return self.json_response({'data':json.loads(body),'revision':revision,'token':TOKEN})
+        if self.path=='/api/backups':
+            with connect() as con:
+                con.execute('CREATE TABLE IF NOT EXISTS backups (id TEXT PRIMARY KEY, created_at TEXT NOT NULL, revision INTEGER NOT NULL, body TEXT NOT NULL)')
+                rows=con.execute('SELECT id,created_at,revision FROM backups ORDER BY created_at DESC').fetchall()
+            return self.json_response({'backups':[dict(zip(('id','createdAt','revision'),r)) for r in rows]})
+        if self.path.startswith('/api/backups/'):
+            backup_id=self.path.rsplit('/',1)[-1]
+            if not re.fullmatch('[a-f0-9]{32}',backup_id): return self.json_response({'error':'Mã sao lưu không hợp lệ'},400)
+            with connect() as con:
+                con.execute('CREATE TABLE IF NOT EXISTS backups (id TEXT PRIMARY KEY, created_at TEXT NOT NULL, revision INTEGER NOT NULL, body TEXT NOT NULL)')
+                row=con.execute('SELECT body FROM backups WHERE id=?',(backup_id,)).fetchone()
+            return self.json_response({'data':json.loads(row[0])}) if row else self.json_response({'error':'Không thấy sao lưu'},404)
         if self.path.startswith('/api/'): return self.json_response({'error':'Không tìm thấy'},404)
         return super().do_GET()
     def do_POST(self):
         if not self.allowed() or self.headers.get('X-Xuong-Token')!=TOKEN:
             return self.json_response({'error':'Yêu cầu không hợp lệ'},403)
-        if self.path!='/api/state': return self.json_response({'error':'Không tìm thấy'},404)
+        if self.path not in ('/api/state','/api/restore'): return self.json_response({'error':'Không tìm thấy'},404)
         try:
             size=int(self.headers.get('Content-Length','0'))
             if not 0<size<=20_000_000: return self.json_response({'error':'Dữ liệu tối đa 20MB'},413)
-            payload=json.loads(self.rfile.read(size)); rev=save_state(payload['data'],payload['revision'])
-            self.json_response({'revision':rev})
+            payload=json.loads(self.rfile.read(size)); rev=save_state(payload['data'],payload['revision'],restore=self.path=='/api/restore')
+            self.json_response({'revision':rev,'data':payload['data']})
         except RuntimeError as e: self.json_response({'error':str(e)},409)
-        except (ValueError,KeyError,TypeError) as e: self.json_response({'error':str(e)},400)
+        except (ValueError,KeyError,TypeError,RecursionError) as e: self.json_response({'error':str(e)},400)
+        except sqlite3.Error:
+            self.json_response({'error':'Không ghi được cơ sở dữ liệu hoặc sao lưu an toàn. Dữ liệu chưa được thay thế.'},500)
 
 if __name__=='__main__':
     connect().close()
     url=f'http://127.0.0.1:{PORT}'
     server=ThreadingHTTPServer(('127.0.0.1',PORT),Handler)
-    print('Xưởng Truyện 0.1.0 — '+url, flush=True)
+    print('Xưởng Truyện 0.1.1 — '+url, flush=True)
     if '--no-browser' not in __import__('sys').argv: webbrowser.open(url)
     try: server.serve_forever()
     except KeyboardInterrupt: server.server_close()

@@ -1,4 +1,4 @@
-# Xưởng Truyện — 0.1.0
+# Xưởng Truyện — 0.1.1
 
 Ứng dụng tiếng Việt để quản lý và sản xuất truyện dài kỳ, hướng tới đăng tiếng Anh trên Webnovel. Tham khảo **cách phân chia công việc** của [InkOS](https://github.com/Narcooo/inkos), phần triển khai trong repository này được viết riêng; không sao chép mã nguồn, thương hiệu hay prompt InkOS.
 
@@ -39,7 +39,7 @@ Bản dịch lưu riêng, không thay bản gốc. Khi bản gốc, tiêu đề,
 
 ## Lưu trữ và sao lưu
 
-Dữ liệu ở `data/xuong-truyen.sqlite3` trên máy. Không xóa thư mục `data` khi cập nhật. Có xuất/nhập JSON toàn bộ dữ liệu; nhập thay thế cần xác nhận. Sao lưu thường xuyên và trước mỗi lần cập nhật. Đây là ứng dụng một người dùng trên máy, chỉ lắng nghe localhost; không đưa server này trực tiếp lên Internet.
+Dữ liệu ở `data/xuong-truyen.sqlite3` trên máy. Không xóa thư mục `data` khi cập nhật. Có xuất/nhập JSON toàn bộ dữ liệu; nhập thay thế cần xác nhận. Sao lưu thường xuyên và trước mỗi lần cập nhật. Trước mỗi lần nhập JSON, ứng dụng tự giữ dữ liệu cũ; mở **Sao lưu an toàn** để tải lại bản trước. Nút **Bản đang soạn** giữ nội dung qua đóng popup hoặc tải lại cùng tab. Xem [thay đổi và giới hạn](docs/CHANGELOG.md). Đây là ứng dụng một người dùng trên máy, chỉ lắng nghe localhost; không đưa server này trực tiếp lên Internet.
 
 ## Tình trạng thực tế
 
@@ -52,7 +52,7 @@ Repository là mã nguồn ứng dụng, không phải đường dẫn web đã 
 ## Kiểm tra
 
 ```sh
-node --test tests/core.test.cjs
+node --test tests/*.test.cjs
 python -m unittest discover -s tests -p 'test_*.py'
 ```
 
