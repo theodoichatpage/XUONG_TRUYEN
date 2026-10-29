@@ -1,58 +1,48 @@
-# Xưởng Truyện — 0.4.0
+# XUONG_TRUYEN — kho tiêu chuẩn/module phụ cho Xưởng Nội Dung
 
-Ứng dụng tiếng Việt để quản lý và sản xuất truyện dài kỳ, hướng tới đăng tiếng Anh trên Webnovel. Tham khảo **cách phân chia công việc** của [InkOS](https://github.com/Narcooo/inkos), phần triển khai trong repository này được viết riêng; không sao chép mã nguồn, thương hiệu hay prompt InkOS.
+> **Định vị chính thức:** repository này KHÔNG phải web/phần mềm độc lập cần tiếp tục phát triển. Web sản phẩm là **Xưởng Nội Dung** tại `theodoichatpage/XUONG_NOI_DUNG`. Mã local Python/SQLite và extension cũ được giữ lại làm **tham chiếu/nguồn di trú**, không phải kiến trúc đích.
 
-## Chạy trên Windows
+## Vai trò
 
-1. Cài Python 3.10 trở lên từ python.org nếu máy chưa có.
-2. Tải repository bằng **Code → Download ZIP**, giải nén.
-3. Chạy **MO_XUONG_TRUYEN.bat**. Trình duyệt mở tại `http://127.0.0.1:7872`.
-4. Giữ cửa sổ chạy chương trình; đóng cửa sổ để dừng.
+XUONG_TRUYEN lưu các tiêu chuẩn vận hành và module đã thử nghiệm để tái sử dụng trong mục **Bộ truyện / Webnovel** của Xưởng Nội Dung:
 
-Không cần npm, API key hoặc dịch vụ cơ sở dữ liệu. Để kết nối ChatGPT, xem [hướng dẫn extension](extension/HUONG_DAN.md). Chạy từ terminal: `python server.py`.
+- Dàn ý phân cấp: **Tập → Tuyến truyện → Kế hoạch chương → Cảnh**.
+- Tóm tắt gắn với phiên bản nội dung chương; không dùng tóm tắt cũ sau khi nội dung đổi.
+- Trí nhớ và nút thắt có trạng thái, chương gợi mở, mốc dự kiến, chương/kết quả giải quyết.
+- Dịch **English ↔ 中文（简体） ↔ Tiếng Việt** theo 6 chiều.
+- Bảng thuật ngữ theo cặp ngôn ngữ.
+- Chia đoạn có mã, dịch theo nhóm, kiểm tra thiếu/trùng/sai mã đoạn.
+- Rà soát độc lập theo nhóm; lỗi phải có lý do và trạng thái xử lý trước khi duyệt.
+- Bảo vệ bản đã sửa, lịch sử và sao lưu.
+- AI chỉ tạo bản nháp; **không tự đăng truyện khi chưa duyệt**.
 
-## Các khu vực vận hành
+## Kiến trúc đích
 
-| Khu vực | Công việc |
-|---|---|
-| Thư viện truyện | Tạo và chọn bộ truyện; thống kê số chương, số chương chờ duyệt |
-| Hồ sơ truyện | Tiền đề, thể loại, ngôn ngữ, giọng văn, thế giới, quy tắc, độc quyền |
-| Nhân vật | Vai trò, mục tiêu, tính cách, quan hệ và chi tiết cần nhất quán |
-| Dàn ý | Cây Tập → Tuyến truyện → Kế hoạch chương → Cảnh, phạm vi và liên kết chương |
-| Viết chương | Ý định chương, bản thảo, tóm tắt, trạng thái và lịch sử thay đổi |
-| Trí nhớ & nút thắt | Sự kiện và nút thắt có trạng thái, chương gợi mở, mốc giải quyết và cảnh báo quá mốc |
-| Dịch thuật Anh · Trung · Việt | Sáu hướng dịch, bảng thuật ngữ theo cặp, đối chiếu theo đoạn, rà soát độc lập, duyệt và xuất song ngữ |
-| Duyệt & xuất bản | Duyệt chương, xuất TXT, mở Inkstone và ghi link đã đăng |
+`XUONG_NOI_DUNG` là nơi duy nhất chứa giao diện sản phẩm và ChatGPT Bridge dùng thực tế. XUONG_TRUYEN không tạo hosting, server hoặc extension mới. Các module ở `web/`, `server.py`, `translation_data.py`, `job_data.py`, `extension/` và `MO_XUONG_TRUYEN.bat` là di sản từ prototype local, giữ nguyên để đối chiếu và nhập dữ liệu cũ.
 
-## Luồng vận hành
+ChatGPT dùng qua **Xưởng ChatGPT Bridge** của XUONG_NOI_DUNG và tài khoản ChatGPT trên trình duyệt; không bắt buộc API trả phí. Extension `Xuong_Truyen_Bridge_v1.0.0` trong repo này đã **ngừng là extension chính**, chỉ giữ để tham chiếu kiểm thử cũ.
 
-Tạo bộ truyện → điền hồ sơ → lập nhân vật và dàn ý → tạo chương → soạn yêu cầu ChatGPT → gửi bằng extension hoặc sao chép thủ công → nhận kết quả về → chờ duyệt → ghi tóm tắt và trí nhớ đã xác nhận → chương tiếp theo.
+## Tài liệu chuẩn
 
-Yêu cầu viết chọn dàn ý liên quan theo liên kết chương, lấy tối đa 3 chương trước đã duyệt và chỉ dùng tóm tắt khớp phiên bản nội dung. Trí nhớ lấy các mục đã xác nhận trước chương hiện tại. Xem [hướng dẫn truyện dài](docs/TRUYEN_DAI.md). Đây là ngữ cảnh có cấu trúc, chưa phải tìm kiếm ngữ nghĩa/RAG. Bản AI không ghi đè chương đã duyệt. Có kiểm tra xung đột khi hai tab cùng lưu.
+- `docs/TRUYEN_DAI.md` — quy trình truyện dài, dàn ý, trí nhớ, nút thắt và phiên bản tóm tắt.
+- `docs/DICH_THUAT_NANG_CAO.md` — dịch Anh/Trung giản thể/Việt, thuật ngữ, chia nhóm và rà soát.
+- `docs/QUY_TRINH_TIENG_ANH.md` — quy trình tiếng Anh cũ, dùng để đối chiếu.
+- `docs/KET_NOI_CHATGPT.md` — tài liệu bridge prototype; không phải hướng dẫn cài extension chính hiện tại.
+- `tests/` — kiểm thử mô phỏng của các quy tắc/module cũ.
 
-## Dịch thuật Anh – Trung – Việt
+## Di trú dữ liệu local
 
-Chọn ngôn ngữ nguồn/đích và giọng văn, duyệt thuật ngữ → dịch lần lượt các nhóm đoạn → rà soát từng nhóm bằng lượt AI riêng → đối chiếu song ngữ, sửa và xử lý lỗi → duyệt → xuất TXT đơn ngữ/song ngữ. Hỗ trợ Trung giản thể; không dịch tự động qua API. Extension có thể điền yêu cầu và nhận kết quả, người dùng bấm Gửi trong ChatGPT và Áp dụng tại Xưởng.
+Không xóa `data/xuong-truyen.sqlite3`. Khi chuyển sang Xưởng Nội Dung:
 
-Bản gốc và mỗi ngôn ngữ đích lưu riêng. Nguồn, quy chuẩn hoặc thuật ngữ đổi thì phải rà soát lại. Xem [hướng dẫn dịch nâng cao và các dự án tham khảo](docs/DICH_THUAT_NANG_CAO.md).
+1. Mở prototype local cũ chỉ để xuất JSON `{ "version": 1, "books": [...] }`.
+2. Trên Xưởng Nội Dung mở **Webnovel → Truyện dài & dịch thuật → Nhập dữ liệu local**.
+3. Xưởng kiểm tra định dạng, tạo bản sao dữ liệu web trước khi nhập, đối chiếu ID/dấu vân tay để tránh nhập trùng.
+4. Dữ liệu local vẫn giữ nguyên; nhập là thao tác sao chép, không phải di chuyển/xóa.
 
-## Lưu trữ và sao lưu
+## Nguyên tắc phát triển tiếp
 
-Dữ liệu ở `data/xuong-truyen.sqlite3` trên máy. Không xóa thư mục `data` khi cập nhật. Có xuất/nhập JSON toàn bộ dữ liệu; nhập thay thế cần xác nhận. Sao lưu thường xuyên và trước mỗi lần cập nhật. Trước mỗi lần nhập JSON, ứng dụng tự giữ dữ liệu cũ; mở **Sao lưu an toàn** để tải lại bản trước. Nút **Bản đang soạn** giữ nội dung qua đóng popup hoặc tải lại cùng tab. Xem [thay đổi và giới hạn](docs/CHANGELOG.md). Đây là ứng dụng một người dùng trên máy, chỉ lắng nghe localhost; không đưa server này trực tiếp lên Internet.
+Mọi tính năng sản phẩm mới phải triển khai ở `XUONG_NOI_DUNG`. Chỉ cập nhật repository này khi cần bổ sung tiêu chuẩn, prompt, fixture kiểm thử hoặc tài liệu tham chiếu. Không hồi sinh web `127.0.0.1:7872`, không tạo hosting riêng, không tạo extension thứ hai.
 
-## Tình trạng thực tế
+## Mốc tham chiếu
 
-**Đã có:** giao diện vận hành, CRUD tạo/sửa các mục, lưu SQLite, sao lưu JSON, bản nháp/lịch sử, chuẩn bị ngữ cảnh ChatGPT, nhận kết quả thủ công, dịch thuật song song và kiểm tra trước xuất TXT.
-
-**Chưa có:** tự bấm Gửi trong ChatGPT, tạo ảnh/bìa, đăng qua API, tài khoản máy chủ, đồng bộ nhiều máy, cron, mô hình biên tập tự chạy hoặc cam kết chất lượng dịch. Gói ChatGPT Plus dùng trong trình duyệt riêng của bạn; phần mềm không sử dụng API trả phí. Có extension Xưởng Truyện Bridge 1.0.0 riêng cho ứng dụng này; [hướng dẫn kết nối](docs/KET_NOI_CHATGPT.md).
-
-Repository là mã nguồn ứng dụng, không phải đường dẫn web đã triển khai. [Kế hoạch phát triển](docs/KE_HOACH.md).
-
-## Kiểm tra
-
-```sh
-node --test tests/*.test.cjs
-python -m unittest discover -s tests -p 'test_*.py'
-```
-
-Kiểm tra JavaScript cần Node.js; chạy ứng dụng không cần Node.js.
+Prototype local hoàn chỉnh gần nhất trước khi đổi kiến trúc: commit `1996ce12e8d5c322fe08bd1921148398bba78836`. Mốc này dùng để đối chiếu, **không dùng để rollback HEAD tương lai**.
