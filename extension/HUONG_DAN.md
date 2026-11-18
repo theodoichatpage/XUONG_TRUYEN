@@ -1,34 +1,70 @@
-# Xưởng Truyện ChatGPT Bridge — extension 1.0.0
+# Xưởng ChatGPT Bridge 0.4.15
 
-Dùng cùng Xưởng Truyện từ **0.4.0**. Hai số phiên bản khác nhau: ứng dụng 0.4.0, extension 1.0.0. Đây là extension riêng, không phải extension Xưởng Nội Dung hoặc VIDEO IMAGE STUDIO.
+## Cài trên Chrome hoặc Microsoft Edge máy tính
 
-## Cài
+1. ZIP chứa duy nhất thư mục `Xuong_ChatGPT_Bridge`. Giải nén và đặt thư mục này ở một nơi cố định. Không chọn cả ZIP.
+2. Chrome: mở `chrome://extensions`; Edge: `edge://extensions`.
+3. Bật **Chế độ nhà phát triển** → **Tải tiện ích đã giải nén** → chọn thư mục chứa `manifest.json`.
+4. Tải lại trang Xưởng và tab ChatGPT sau khi cài. Đăng nhập ChatGPT như bình thường.
+5. Mở biểu tượng extension, chọn đúng tab ChatGPT → **Kết nối tab đã chọn**.
+6. Xưởng → tab **ChatGPT** → **Kiểm tra kết nối**.
 
-1. Giải nén `Xuong_Truyen_Bridge_v1.0.0.zip` thành một thư mục riêng; giữ thư mục này sau khi cài.
-2. Chrome: mở `chrome://extensions`. Edge: mở `edge://extensions`.
-3. Bật Chế độ nhà phát triển → Tải tiện ích đã giải nén → chọn thư mục có `manifest.json`.
-4. Mở Xưởng tại `http://127.0.0.1:7872` hoặc `http://localhost:7872`. Mở ChatGPT trong cùng trình duyệt, cùng profile. Tải lại cả hai tab sau khi cài.
-5. Mở popup **Xưởng Truyện × ChatGPT**, bấm Tải lại danh sách, chọn đúng hội thoại, bấm Kết nối tab đã chọn.
+## Viết truyện
 
-Chỉ hỗ trợ cổng 7872 và ChatGPT `https://chatgpt.com/`; nếu đổi cổng phải cập nhật và tải lại extension. Firefox không cài trực tiếp bản Manifest V3 này; dùng Chrome/Edge hoặc sao chép/dán thủ công.
+- Thêm kênh, tạo bộ truyện và chương trong Xưởng.
+- Điền dàn ý, nhân vật, giọng văn và yêu cầu viết.
+- Mở chương → **Viết bằng ChatGPT**. Xưởng lưu nội dung hiện tại trước khi chuyển.
+- Extension tự điền câu lệnh và **tự bấm Gửi** trong ChatGPT (tắt ở popup: "Tự động bấm Gửi trong ChatGPT"). Không xóa mã `[XUONG_JOB:...]`.
+- Extension chờ câu trả lời hoàn tất và gửi về Xưởng. Mở tab ChatGPT trong lúc xử lý.
+- Nếu bản nháp không thay đổi trong lúc chờ, kết quả vào bài và chuyển Chờ duyệt. Nếu đã chỉnh sửa hoặc bài đã duyệt/đã đăng, kết quả giữ riêng trong tab ChatGPT của Xưởng để bạn áp dụng.
+- Không tự xuất bản nội dung.
 
-## Vận hành
+## Tạo ảnh
 
-- **Viết chương:** lưu bản nháp → Soạn yêu cầu ChatGPT → Gửi sang ChatGPT.
-- **Dịch/rà soát:** mở đúng nhóm tại tab Dịch thuật → Gửi sang ChatGPT.
-- Extension điền yêu cầu có mã công việc. Bạn kiểm tra rồi bấm Gửi tại ChatGPT. Không đổi hội thoại hoặc gửi một tin nhắn khác khi đang chờ.
-- Kết quả hoàn tất sẽ được nhận về danh sách **Kết nối ChatGPT**. Bấm Áp dụng sau khi xem. Viết chương luôn về Chờ duyệt, bản dịch/rà soát không tự được duyệt.
-- Nếu nhận tự động không chạy: bấm **Nhận kết quả hoàn tất** ở bảng nổi trong ChatGPT, rồi **Nhận lại kết quả** ở Xưởng. Vẫn có thể sao chép/dán thủ công.
+- Xưởng → Hình ảnh → Chuẩn bị ảnh → nhập phong cách, nội dung và tỷ lệ.
+- Bấm **Tạo ảnh bằng ChatGPT**, extension tự điền và bấm Gửi trong tab ChatGPT.
+- Khi tìm được ảnh hoàn tất trong đúng câu trả lời, extension thử tải ảnh hiển thị về Xưởng, giữ bản gốc và tạo ảnh xem trước. Ảnh luôn Chưa duyệt.
+- Ảnh trên 5 MB, URL ảnh không hỗ trợ, blob, giới hạn tài khoản hoặc giao diện mới có thể không nhận tự động. Khi đó tải ảnh trong ChatGPT rồi nhập vào đúng yêu cầu ảnh trong Xưởng.
 
-Chỉ một công việc đang chạy mỗi lần. Không tự chuyển hội thoại, không tự F5 hoặc chạy hàng loạt. Dừng đồng bộ không dừng việc ChatGPT đang tạo câu trả lời; bạn cần bấm Dừng tại ChatGPT nếu muốn.
+## Khôi phục và xử lý lỗi
 
-## An toàn dữ liệu và giới hạn
+- ChatGPT đã hoàn tất nhưng Xưởng chưa nhận: bấm **Nhận kết quả hoàn tất** trên bảng nổi của extension; Xưởng → ChatGPT → **Nhận lại kết quả**.
+- Tải lại ChatGPT: extension tiếp tục theo công việc và mã đã lưu; không tự gửi lại yêu cầu, tránh tạo trùng.
+- Xưởng đóng/mở lại: kết quả lưu tạm trong extension; mở lại cùng nguồn trang và bấm Nhận lại. Giữ dữ liệu Xưởng; không xóa dữ liệu trình duyệt khi còn công việc.
+- Ô nhập có chữ chưa gửi: extension không ghi đè. Gửi/xóa thủ công, dừng công việc rồi gửi lại từ Xưởng.
+- Muốn đổi hội thoại: dừng đồng bộ trước, chọn tab mới trong popup.
+- Dừng đồng bộ không bấm nút Dừng của ChatGPT. Dừng tại ChatGPT nếu cần.
+- Chỉ một công việc tại một thời điểm; không có cron chạy khi trình duyệt đóng.
 
-- Quyền: đọc danh sách tab để chọn tab ChatGPT; lưu công việc/kết quả trong storage của extension; script chỉ hoạt động trên ChatGPT và hai địa chỉ Xưởng cục bộ nêu trên.
-- Không đọc cookie, mật khẩu hoặc khóa API, không gọi API mô hình hoặc API nội bộ ChatGPT. Chỉ điền ô nhập và đọc câu trả lời hiển thị trong trang.
-- Mã công việc, tab và đường dẫn hội thoại dùng để tránh nhận nhầm; kết quả đã nhận lưu ở extension cho tới khi Xưởng xác nhận đã lưu SQLite. Kết quả ready/applied không nhận thêm bản trùng.
-- Tải lại cùng tab có thể tiếp tục công việc đang giữ. Nếu đóng mất tab ChatGPT thì cần dừng, chọn lại tab và gửi yêu cầu mới; không tự khôi phục toàn bộ sau khi đóng trình duyệt.
-- Chrome/Edge, Xưởng và ChatGPT phải mở. Giới hạn gói ChatGPT vẫn áp dụng. Cấu trúc giao diện ChatGPT có thể đổi và làm selector không còn khớp; đã có đường sao chép/dán dự phòng.
-- Prompt, checkpoint và kết quả là bản thảo riêng tư; tồn tại trong SQLite, bản sao lưu và extension storage. Không công khai các dữ liệu đó lên GitHub.
+## Phạm vi và quyền
 
-Chưa kiểm thử extension đã cài trên tài khoản ChatGPT thực tế. Các kiểm thử tự động dùng mô phỏng giao tiếp, lưu trữ và tình huống nhận nhầm; không thay thế nghiệm thu trên Chrome/Edge của bạn.
+Dùng giao diện ChatGPT, không gọi API tạo văn bản/ảnh, không cần API key. Giới hạn của gói ChatGPT vẫn áp dụng. Đây là cầu nối trình duyệt tự xây dựng, không phải tích hợp chính thức của OpenAI và có thể cần sửa khi giao diện ChatGPT thay đổi.
+
+Quyền `tabs` để chọn tab, `storage` để giữ công việc/kết quả, quyền trang ChatGPT và oaiusercontent để đọc/tải đúng ảnh trả lời. Không đọc mật khẩu, không lưu cookie/token, không gửi về máy chủ bên thứ ba. Không tự đăng nhập hoặc vượt giới hạn sử dụng. Chỉ thu nhận câu trả lời theo sau tin nhắn chứa đúng mã công việc.
+
+Dữ liệu Xưởng và ảnh gốc vẫn nằm trên thiết bị. Sao lưu JSON không kèm file gốc trong IndexedDB; tải file gốc riêng. Extension có thể tạm giữ câu trả lời và một ảnh tối đa 5 MB cho đến khi Xưởng xác nhận nhận được.
+
+## Kiểm tra đã thực hiện
+
+14 kiểm thử tự động cho điều phối, chọn hội thoại, chặn nguồn lạ, công việc trùng, phục hồi kết quả, hủy, xử lý URL ảnh, parse truyện và bảo vệ bản nháp. Kiểm tra cú pháp JavaScript.
+
+Chưa kiểm thử end-to-end trên tài khoản ChatGPT thật với extension được cài. Cần một lượt viết chương và tạo ảnh trên Chrome/Edge của người dùng để xác minh selector giao diện hiện tại; không cam kết nhận mọi định dạng ảnh tự động.
+
+## Cập nhật extension đã cài — giữ nguyên thư mục
+
+1. Tải gói mới từ trang Tải Bridge trong Xưởng. Tên ZIP chứa phiên bản; thư mục bên trong luôn là `Xuong_ChatGPT_Bridge`.
+2. Giải nén ra chỗ tạm, sao chép các file bên trong vào đúng thư mục extension đang dùng và chọn **ghi đè**. Không chép lồng cả thư mục.
+3. Mở `chrome://extensions` hoặc `edge://extensions`, bấm **Tải lại** trên extension đã cài. Không cài thêm một bản thứ hai.
+4. F5 cả Xưởng và ChatGPT, chọn lại tab trong popup và kiểm tra trạng thái xanh trên Xưởng.
+
+Bridge 0.4.15 chờ ChatGPT sẵn sàng rồi mới điền, kiểm tra ChatGPT đã nhận chữ (nếu chưa thì dán lại), chỉ bấm đúng nút Gửi và xác nhận đã gửi, tự thử lại khi yêu cầu còn nằm trong ô. Bridge 0.4.13 mở cuộc trò chuyện ChatGPT mới cho mỗi việc (tắt trong popup: "Mỗi việc dùng cuộc trò chuyện mới"), tránh lỗi đầy ngữ cảnh. Bridge 0.4.12 nhận kết quả cả khi ChatGPT đổi địa chỉ trang trong lúc trả lời và cho Xưởng yêu cầu đọc lại câu trả lời (nút Lấy kết quả từ ChatGPT). Bridge 0.4.11 mở tab ChatGPT chỉ trong lúc gửi, gửi xong tự quay về tab Xưởng (nếu tắt tự gửi thì giữ tab ChatGPT để bạn bấm Gửi). Bridge 0.4.10 tự tải lại khi file trong thư mục extension được thay bằng bản mới (dùng cùng trình tự cập nhật bên dưới). Bridge 0.4.9 nhận kết quả cả khi ChatGPT đổi địa chỉ hội thoại (ví dụ chuyển vào Project) và giữ việc đang chạy khi cập nhật extension. Bridge 0.4.8 đọc câu trả lời trên mọi kiểu giao diện ChatGPT (kể cả ResponseRoot, không có thuộc tính vai trò) và coi là xong khi JSON đã hoàn chỉnh. Bridge 0.4.7 tự nhận câu trả lời mới của ChatGPT kể cả khi tin nhắn dài bị thu gọn. Bridge 0.4.6 nhận được câu trả lời trên giao diện ChatGPT khi đã đăng nhập (dò theo mã việc [XUONG_JOB]). Bridge 0.4.5 khi cài hoặc tải lại sẽ tự xóa việc bị kẹt và tải lại các tab Xưởng và ChatGPT. Bridge 0.4.4 tự bấm Gửi trong ChatGPT (tắt được trong popup). Bridge 0.4.3 nhận ra ô nhập kiểu mới của ChatGPT. Bridge 0.4.2 chạy trên https://xuong-noi-dung-khaki.vercel.app; popup hiện trạng thái ChatGPT và mục "Trang Xưởng" để tự chẩn đoán (bị chặn quyền / chưa nạp / đã nạp) kèm nút sửa nhanh. Giao thức kết nối không thay đổi. Nếu popup ghi Xưởng Truyện 1.0.0 thì đó là Bridge khác.
+
+## Tự cập nhật (Windows)
+
+Từ 0.4.10, Bridge tự tải lại khi thư mục extension có bản mới. Để máy tự tải bản mới về, chạy một lần (không cần quyền quản trị):
+
+```
+powershell -ExecutionPolicy Bypass -File install-bridge-updater.ps1 -Dest "C:\\Users\\<bạn>\\Downloads\\Xuong_ChatGPT_Bridge"
+```
+
+Trình cập nhật chạy ngầm 15 phút một lần (tác vụ "XuongBridgeUpdater" của người dùng hiện tại): kiểm tra bridge-release.json, tải ZIP, đối chiếu SHA-256 rồi chép đè vào thư mục trên. Gỡ: chạy lại lệnh với `-Remove`. Nhật ký: %LOCALAPPDATA%\\XuongBridgeUpdater\\update.log.

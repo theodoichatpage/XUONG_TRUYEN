@@ -1,0 +1,99 @@
+/* Global typography and buttons — loaded last. */
+/* Font: Arial everywhere; body text 14px (headings keep their sizes). */
+body.u-app,body.u-app #sidebar,body.u-app #main,dialog{font-family:Arial,Helvetica,sans-serif}
+body.u-app #main :is(p,small,label,span,a,li,td,th,figcaption,input,select,textarea,button,b,strong,i,em,div),
+dialog :is(p,small,label,span,a,li,td,th,figcaption,input,select,textarea,button,b,strong,i,em,div),
+body.u-app #nav a{font-family:Arial,Helvetica,sans-serif!important;font-size:14px!important}
+/* Keep large display numbers and decorative initials. */
+body.u-app #main .u-kpi strong{font-size:22px!important}
+body.u-app #main .st-initial{font-size:16px!important}
+
+/* Buttons: 32px high, rounded corners (not library rows, thumbnails, text links or icon buttons). */
+body.u-app #main button:not(.st-item):not(.pr-item):not(.u-library-item):not(.st-link):not(.pr-link):not(.u-text):not(.st-icon-btn):not(.pr-ref-thumb):not(.pr-design-thumb):not(.pr-ref-check):not(.u-character):not(.u-reference):not(.u-design),
+body.u-app #main .u-button,
+dialog button,dialog .u-button{height:32px;min-height:32px;border-radius:8px}
+body.u-app #main .u-segment,dialog .u-segment{border-radius:8px;overflow:hidden}
+
+/* Tabs sit at the top now that the page heading is gone. */
+.st-tabs,.pr-tabs{margin-top:0}
+
+/* Former green/blue status labels: darker orange text on orange tints for readability. */
+body.u-app #main :is(.u-badge.green,.u-badge.blue,.pr-badge.green,.pr-badge.blue,.st-initial.c1,.st-initial.c2){color:#9c2f0e}
+body.u-app #main .u-blue{color:#a83210}
+html.dark body.u-app #main .u-blue{color:#ff9a78}
+html.dark body.u-app #main :is(.pr-badge.green,.pr-badge.blue){color:#ffb59c}
+
+/* 06/11/2026: rounded UI — controls 8px, panels 12px, chips/badges pill; inputs 32px high, Arial 14px. */
+body.u-app #main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),select),dialog :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),select){height:32px;min-height:32px;border-radius:8px;font-family:Arial,Helvetica,sans-serif;font-size:14px}
+body.u-app #main textarea,dialog textarea{border-radius:8px}
+body.u-app #main :is(.u-card,.st-panel,.pr-panel,.sb-nav,.sb-blk,.sb-card,.u-job,.pl-blk,.st-assistant,.st-steps,.u-integration,.sw-sec,.rv-scroll,.u-table,.st-library,.u-library),dialog{border-radius:12px}
+body.u-app #main :is(.sb-card,.u-integration,.sw-sec){overflow:hidden}
+body.u-app :is(.u-chip,.sb-tag,.u-badge,.pr-badge,.st-pill,.sp-st){border-radius:999px}
+body.u-app #main .sb-item{border-radius:8px}
+.u-chip{height:30px}
+.u-chip.warn i{background:#e8b33a}
+/* Settings popup: outer glow, cards aligned to the top, every action button the same size. */
+.u-settings-modal{border-radius:14px;border-color:rgba(255,90,31,.55);box-shadow:0 0 0 1px rgba(255,90,31,.25),0 0 28px rgba(255,90,31,.35),0 24px 60px rgba(0,0,0,.55)}
+.u-writer-modal{border-radius:14px;border-color:rgba(255,90,31,.55);box-shadow:0 0 0 1px rgba(255,90,31,.25),0 0 28px rgba(255,90,31,.35),0 24px 60px rgba(0,0,0,.55)}
+.u-settings-modal .u-card{align-self:start}
+.u-settings-modal :is(.u-card button,.u-card .u-button):not(.u-modal-x):not(.st-link){width:168px;min-width:168px;height:32px;justify-content:center;text-align:center;border-radius:8px;padding:0 10px}
+.u-settings-modal .u-segment button{width:120px;min-width:120px}
+.u-settings-modal .u-modal-x{border-radius:8px}
+/* Step 3: manual Sudowrite actions tucked away */
+.sp-more{display:inline-block;position:relative}.sp-more summary{list-style:none;cursor:pointer;height:32px;line-height:30px;padding:0 12px;border:1px solid var(--st-line,#2a2a2f);border-radius:8px;color:var(--st-muted,#9a9aa2)}
+.sp-more summary::-webkit-details-marker{display:none}.sp-more[open]>div{position:absolute;z-index:20;top:36px;left:0;display:grid;gap:6px;padding:8px;background:var(--st-panel,#121214);border:1px solid var(--st-line,#2a2a2f);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.u-settings-modal .u-settings-grid{align-items:start}
+.u-settings-modal :is(.u-settings-left,.u-settings-right)>*{flex:none!important}
+.u-settings-modal .u-settings-right .u-hint{margin-top:8px}
+.u-settings-modal .u-card :is(.u-text,a.u-text){display:inline-flex;align-items:center;height:32px}
+.u-settings-modal .u-card :is(.u-text,a.u-text,button.u-text){width:168px;min-width:168px;height:32px;justify-content:center;border:1px solid var(--u-line);border-radius:8px;text-decoration:none}
+/* Top bar: the menu never shrinks; connection chips compact on narrower screens (details in the tooltip). */
+#nav{flex-shrink:0;white-space:nowrap}
+.u-top-tools{min-width:0}
+.u-chips{min-width:0;flex-wrap:nowrap}
+@media(max-width:1600px){.u-chip small{display:none}}
+@media(max-width:1000px){.u-chips{display:flex}.u-chip{font-size:0!important;gap:0;width:30px;justify-content:center;padding:0}.u-chip i{width:10px;height:10px}}
+
+/* Settings popup v2 — layout of the AI Manager settings, Xưởng orange */
+.u-settings-modal{width:min(1200px,94vw);height:auto;max-height:90vh;padding:22px 24px}
+.set-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}.set-head h2{margin:0;font-size:20px!important}.set-head small{color:var(--u-muted)}
+.set-hico{width:44px;height:44px;border:1px solid var(--u-line);border-radius:12px;display:grid;place-items:center;color:#ff7a45}
+.set-tabs{display:flex;gap:8px;margin-bottom:14px}.set-tabs button{display:inline-flex;align-items:center;gap:8px;width:auto!important;min-width:110px!important;padding:0 14px;border:1px solid var(--u-line);border-radius:10px!important;background:transparent;color:var(--u-ink)}
+.set-tabs button.on{border-color:#ff5a1f;color:#ff7a45;background:rgba(255,90,31,.08)}
+.set-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+.set-card{border:1px solid var(--u-line);border-radius:14px;padding:16px;background:rgba(255,255,255,.015)}
+.set-card h3{display:flex;align-items:center;gap:8px;margin:0;font-size:16px!important}.set-card h3 .u-icon{color:#ff7a45}
+.set-sub{margin:4px 0 12px;color:var(--u-muted)}
+.set-row{display:grid;grid-template-columns:36px minmax(0,1fr) 150px 120px;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--u-line);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,.02)}
+.set-row.set-ver{grid-template-columns:36px minmax(0,1fr) auto auto}
+.set-ico{width:32px;height:32px;border:1px solid var(--u-line);border-radius:8px;display:grid;place-items:center;color:var(--u-muted)}
+.set-name{display:flex;flex-direction:column;min-width:0}.set-name small{color:var(--u-muted);font-size:12.5px!important}
+.set-st{display:flex;flex-direction:column;align-items:flex-start;font-weight:700;white-space:nowrap}.set-st i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:#8b8b90;vertical-align:middle}
+.set-st.ok{color:#ff7a45}.set-st.ok i{background:#4ade80;box-shadow:0 0 6px #4ade80}.set-st.warn{color:#e8b33a}.set-st.warn i{background:#e8b33a}.set-st.bad{color:#f87171}.set-st.bad i{background:#f87171}.set-st.wait{color:var(--u-muted)}
+.set-st small{font-weight:400;color:var(--u-muted);font-size:12px!important;margin-left:14px}
+.u-settings-modal .set-act :is(button,.u-button){width:120px!important;min-width:120px!important;height:32px;justify-content:center;border-radius:8px!important}
+.set-v{color:var(--u-muted)}.set-badge{font-size:12px!important;padding:2px 9px;border:1px solid var(--u-line);border-radius:8px;white-space:nowrap}.set-badge.ok{color:#ff7a45;border-color:#ff5a1f}.set-badge.warn{color:#e8b33a;border-color:#7a5e1f}.set-badge.muted{color:var(--u-muted)}
+.u-settings-modal .set-wide{width:100%!important;min-width:0!important;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #ff5a1f!important;color:#ff7a45;background:transparent;border-radius:10px!important;margin-top:6px}
+.set-note{color:var(--u-muted);font-size:12.5px!important;margin:8px 0 0}
+.set-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--u-line)}.set-opt span small{display:block;color:var(--u-muted);font-size:12px!important}
+.u-settings-modal .set-opt .u-segment button{width:auto!important;min-width:84px!important;padding:0 12px}
+.set-quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}.u-settings-modal .set-quick button{width:100%!important;min-width:0!important;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--u-line);border-radius:10px!important}
+.u-settings-modal .set-quick button .u-icon,.set-tabs .u-icon,.set-wide .u-icon{width:16px;height:16px}
+@media(max-width:900px){.set-grid{grid-template-columns:1fr}.set-row{grid-template-columns:32px minmax(0,1fr) 120px}.set-row .set-st{grid-column:2}.set-row .set-act{grid-column:3;grid-row:1/3}}
+.set-st{overflow:hidden}.set-st>span,.set-st small{max-width:150px;overflow:hidden;text-overflow:ellipsis}
+
+/* 06/11 simplification */
+body.u-app #main .u-writer-opts button,.u-writer-opts button{height:auto!important;min-height:112px!important;white-space:normal;justify-content:flex-start}
+.u-settings-modal{width:min(1200px,94vw)!important;height:min(680px,92vh)!important;max-height:none!important;overflow:auto}
+.sb-body.sb-two{grid-template-columns:minmax(0,1fr) 380px}
+.sb-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.sb-tabs button{height:32px;padding:0 12px;border:1px solid var(--st-line,#2a2a2f);border-radius:999px!important;background:transparent;color:var(--st-muted,#9a9aa2);cursor:pointer}
+.sb-tabs button.on{border-color:#ff5a1f;color:#ff7a45;background:rgba(255,90,31,.08)}
+.sp-vh{display:flex;flex-direction:column;gap:6px;padding:16px 20px;border-bottom:1px solid var(--st-line)}.sp-vh h3{margin:0;font-size:18px!important}.sp-vh .sp-meta{padding:0;border:0}
+.sp-read{flex:1;min-height:0;overflow:auto;padding:20px max(24px,calc((100% - 720px)/2))}.sp-read p{margin:0 0 14px;font-size:16px!important;line-height:1.85}
+.sp-side h4{margin:0}.sp-apst{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--st-muted)}
+.sp-aplog{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;color:var(--st-muted);font-size:12.5px!important}.sp-aplog small{color:var(--st-muted)}
+.st-body.sp-body.rv-two{grid-template-columns:270px minmax(0,1fr)}
+@media(max-width:1200px){.sb-body.sb-two{grid-template-columns:1fr}}
+@media(max-width:1100px){.st-body.sp-body.rv-two{grid-template-columns:1fr}}
+@media(min-width:1101px) and (max-width:1500px){.st-body.sp-body:not(.rv-two){grid-template-columns:230px minmax(0,1fr) 300px;height:calc(100dvh - 54px - 150px)}.st-body.sp-body:not(.rv-two)>.st-assistant{grid-column:auto}.st-body.sp-body:not(.rv-two) :is(.sp-list,.sp-ed){height:auto}}

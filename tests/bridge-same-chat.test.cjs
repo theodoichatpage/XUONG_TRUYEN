@@ -1,0 +1,21 @@
+const test=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
+const src=fs.readFileSync('extension/background.js','utf8'),c=vm.createContext({});vm.runInContext(src.slice(src.indexOf('function chatPath('),src.indexOf('function sameChat(')+src.slice(src.indexOf('function sameChat(')).indexOf('\n')),c);
+test('same conversation is accepted after ChatGPT moves it into a project',()=>{assert.equal(c.sameChat('/c/abc-1','/g/g-p-9/c/abc-1','baseline'),true)});
+test('a new chat or a project home that becomes a conversation is accepted',()=>{assert.equal(c.sameChat('/','/c/x','baseline'),true);assert.equal(c.sameChat('/g/g-p-9/project','/g/g-p-9/c/x','baseline'),true)});
+test('an answer that follows this job marker is accepted wherever it is',()=>{assert.equal(c.sameChat('/c/a','/c/b','marker'),true)});
+test('switching to a different conversation without the marker is still rejected',()=>{assert.equal(c.sameChat('/c/a','/c/b','baseline'),false);assert.equal(c.sameChat('/c/a','/c/b',undefined),false)});
+test('the content script reports how it anchored the answer',()=>{assert.match(fs.readFileSync('extension/chatgpt-content.js','utf8'),/anchor:markerNode\(\)\?'marker':'baseline'/)});
+test('updating the extension keeps a recent running job instead of dropping it',()=>{assert.match(src,/details\?\.reason==='update'&&activeJob&&Date\.now\(\)-\(activeJob\.startedAt\|\|0\)<1800000/)});
+
+test('the ChatGPT tab applies the same conversation rule as the background',()=>{const cs=fs.readFileSync('extension/chatgpt-content.js','utf8');assert.match(cs,/if\(!sameChatHere\(job\.path,path\)\)/);assert.doesNotMatch(cs,/job\.path!=='\/'&&job\.path!==path/);
+  const ctx=vm.createContext({markerNode:()=>null});vm.runInContext(cs.slice(cs.indexOf('function sameChatHere('),cs.indexOf('async function captureResult(')),ctx);
+  assert.equal(ctx.sameChatHere('/c/abc','/g/g-p-1/c/abc'),true);assert.equal(ctx.sameChatHere('/','/c/x'),true);assert.equal(ctx.sameChatHere('/c/a','/c/b'),false);ctx.markerNode=()=>({});assert.equal(ctx.sameChatHere('/c/a','/c/b'),true)});
+test('Xưởng can ask the Bridge to read the ChatGPT answer now (no pasting)',()=>{const st=fs.readFileSync('extension/studio-content.js','utf8'),bg=fs.readFileSync('extension/background.js','utf8'),cs=fs.readFileSync('extension/chatgpt-content.js','utf8');assert.match(st,/'XN_FETCH'/);assert.match(bg,/m\.kind==='XN_FETCH'/);assert.match(cs,/m\.kind==='XN_CHAT_CAPTURE'/)});
+test('results are received from any compatible Bridge, not only the exact newest one',()=>{const w=fs.readFileSync('dist/chatgpt-bridge.js','utf8');assert.doesNotMatch(w,/r\.version===/);assert.match(w,/r\?\.ok&&xnBridgeOK\(r\.version\)\)\{await receiveResults\(\)/)});
+
+test('every job starts in a new ChatGPT conversation unless turned off in the popup',()=>{const bg=fs.readFileSync('extension/background.js','utf8'),cs=fs.readFileSync('extension/chatgpt-content.js','utf8'),pj=fs.readFileSync('extension/popup.js','utf8'),ph=fs.readFileSync('extension/popup.html','utf8');
+  assert.match(bg,/async function freshChat\(tabId\)/);assert.match(bg,/if\(on===false\)return null;await chrome\.tabs\.update\(tabId,\{url:'https:\/\/chatgpt\.com\/'\}\)/);assert.match(bg,/const nt=await freshChat\(t\.id\);if\(nt\)t=nt/);
+  assert.match(cs,/if\(m\.kind==='XN_PING'\)\{reply\(\{ok:true\}\)/);assert.match(ph,/id="freshChat"/);assert.match(pj,/fresh\.checked=v\.freshChat!==false/)});
+
+test('the Send button finder never takes the voice / dictation button, Vietnamese labels included',()=>{const cs=fs.readFileSync('extension/chatgpt-content.js','utf8'),m=cs.match(/const XN_NOT_SEND=(\/.*?\/i);/);assert.ok(m);const re=eval(m[1]);for(const l of['Bắt đầu chế độ thoại','Start voice mode','Dictate button','Nhập bằng giọng nói','Stop streaming'])assert.ok(re.test(l),l);for(const l of['Gửi lời nhắc','Send prompt'])assert.ok(!re.test(l),l);
+  assert.doesNotMatch(cs,/b\.type==='submit'&&!\/voice/,'no generic submit-button fallback');assert.match(cs,/const el=await appReady\(\);/);assert.match(cs,/if\(!await fillComposer\(text\)\)/);assert.match(cs,/xnSendTries<2/)});
